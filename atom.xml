@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://biezhi.me/"/>
-  <updated>2017-07-17T03:07:48.000Z</updated>
+  <updated>2017-07-18T06:59:33.000Z</updated>
   <id>http://biezhi.me/</id>
   
   <author>
@@ -16,153 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>跟上Java8 - 优化工作中那些屎代码</title>
-    <link href="http://biezhi.me/2017/07/24/keep-up-with-java8-optimizing.html"/>
-    <id>http://biezhi.me/2017/07/24/keep-up-with-java8-optimizing.html</id>
-    <published>2017-07-23T16:00:00.000Z</published>
-    <updated>2017-07-17T03:07:48.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="跟上Java8" scheme="http://biezhi.me/categories/%E8%B7%9F%E4%B8%8AJava8/"/>
-    
-    
-      <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
-    
-      <category term="优化" scheme="http://biezhi.me/tags/%E4%BC%98%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>跟上Java8 - 七七八八的黑科技</title>
-    <link href="http://biezhi.me/2017/07/23/keep-up-with-java8-tips.html"/>
-    <id>http://biezhi.me/2017/07/23/keep-up-with-java8-tips.html</id>
-    <published>2017-07-22T16:00:00.000Z</published>
-    <updated>2017-07-17T03:07:48.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="跟上Java8" scheme="http://biezhi.me/categories/%E8%B7%9F%E4%B8%8AJava8/"/>
-    
-    
-      <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
-    
-      <category term="系列" scheme="http://biezhi.me/tags/%E7%B3%BB%E5%88%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>跟上Java8 - 使用lambda并发编程</title>
-    <link href="http://biezhi.me/2017/07/22/keep-up-with-java8-concurrent.html"/>
-    <id>http://biezhi.me/2017/07/22/keep-up-with-java8-concurrent.html</id>
-    <published>2017-07-21T16:00:00.000Z</published>
-    <updated>2017-07-17T03:07:48.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="跟上Java8" scheme="http://biezhi.me/categories/%E8%B7%9F%E4%B8%8AJava8/"/>
-    
-    
-      <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
-    
-      <category term="concurrent" scheme="http://biezhi.me/tags/concurrent/"/>
-    
-      <category term="并发" scheme="http://biezhi.me/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>跟上Java8 - 你忽略了的新特性</title>
-    <link href="http://biezhi.me/2017/07/21/keep-up-with-java8-features.html"/>
-    <id>http://biezhi.me/2017/07/21/keep-up-with-java8-features.html</id>
-    <published>2017-07-20T16:00:00.000Z</published>
-    <updated>2017-07-17T03:07:48.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="跟上Java8" scheme="http://biezhi.me/categories/%E8%B7%9F%E4%B8%8AJava8/"/>
-    
-    
-      <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
-    
-      <category term="features" scheme="http://biezhi.me/tags/features/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>跟上Java8 - 日期和时间最实用技巧</title>
-    <link href="http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html"/>
-    <id>http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html</id>
-    <published>2017-07-19T16:00:00.000Z</published>
-    <updated>2017-07-17T03:07:48.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="跟上Java8" scheme="http://biezhi.me/categories/%E8%B7%9F%E4%B8%8AJava8/"/>
-    
-    
-      <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
-    
-      <category term="datetime" scheme="http://biezhi.me/tags/datetime/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>跟上Java8 - 函数式编程</title>
-    <link href="http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html"/>
-    <id>http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html</id>
-    <published>2017-07-18T16:00:00.000Z</published>
-    <updated>2017-07-17T03:07:48.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="跟上Java8" scheme="http://biezhi.me/categories/%E8%B7%9F%E4%B8%8AJava8/"/>
-    
-    
-      <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
-    
-      <category term="函数式" scheme="http://biezhi.me/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>跟上Java8 - stream入门与实战</title>
-    <link href="http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html"/>
-    <id>http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html</id>
-    <published>2017-07-17T16:00:00.000Z</published>
-    <updated>2017-07-17T03:07:48.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="跟上Java8" scheme="http://biezhi.me/categories/%E8%B7%9F%E4%B8%8AJava8/"/>
-    
-    
-      <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
-    
-      <category term="stream" scheme="http://biezhi.me/tags/stream/"/>
-    
-  </entry>
-  
-  <entry>
     <title>跟上Java8 - 了解lambda</title>
     <link href="http://biezhi.me/2017/07/17/keep-up-with-java8-lambda.html"/>
     <id>http://biezhi.me/2017/07/17/keep-up-with-java8-lambda.html</id>
     <published>2017-07-16T16:00:00.000Z</published>
-    <updated>2017-07-18T06:56:31.000Z</updated>
+    <updated>2017-07-18T06:59:33.000Z</updated>
     
     <content type="html"><![CDATA[<p class="tc">
     <img src="/static/img/article/lambda-expression.png" class="image-bubble" width="500" height="180" title="lambda-expression">
@@ -280,6 +138,7 @@
 <p><code>Comparator.naturalOrder()</code>是一个自然排序的实现，这里可以自定义排序方案。
 你经常看到使用Java8操作集合的时候可以直接foreach的原因也是在<code>Iterable</code>接口中也新增了一个默认方法：<code>forEach</code> ，
 该方法功能和 for 循环类似，但是允许 用户使用一个<code>Lambda</code>表达式作为循环体。</p>
+<p>在后面的章节中我们再次通过案例来展示函数式编程的魅力 :)</p>
 ]]></content>
     
     <summary type="html">
