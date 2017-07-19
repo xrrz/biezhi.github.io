@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://biezhi.me/"/>
-  <updated>2017-07-19T06:50:39.000Z</updated>
+  <updated>2017-07-19T06:52:04.000Z</updated>
   <id>http://biezhi.me/</id>
   
   <author>
@@ -20,11 +20,12 @@
     <link href="http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html"/>
     <id>http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html</id>
     <published>2017-07-17T16:00:00.000Z</published>
-    <updated>2017-07-19T06:50:39.000Z</updated>
+    <updated>2017-07-19T06:52:04.000Z</updated>
     
     <content type="html"><![CDATA[<p>在前面我们简单介绍了<code>lambda</code>表达式，Java8旨在帮助程序员写出更好的代码，
 其对核心类库的改进也是关键的一部分，<code>Stream</code>是Java8种处理集合的抽象概念，
 它可以指定你希望对集合的操作，但是执行操作的时间交给具体实现来决定。</p>
+<a id="more"></a>
 <h2 id="为什么需要Stream"><a href="#为什么需要Stream" class="headerlink" title="为什么需要Stream?"></a>为什么需要Stream?</h2><p>Java语言中集合是使用最多的API，几乎每个Java程序都会用到集合操作，
 这里的Stream和IO中的Stream不同，它提供了对集合操作的增强，极大的提高了操作集合对象的便利性。</p>
 <p>集合对于大多数编程任务而言都是基本的，为了解释集合是怎么工作，我们想象一下当下最火的外卖APP，
@@ -165,7 +166,7 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
     
       &lt;p&gt;在前面我们简单介绍了&lt;code&gt;lambda&lt;/code&gt;表达式，Java8旨在帮助程序员写出更好的代码，
 其对核心类库的改进也是关键的一部分，&lt;code&gt;Stream&lt;/code&gt;是Java8种处理集合的抽象概念，
-它可以指定你希望对集合的操作，但是执行操作的时间交给具体
+它可以指定你希望对集合的操作，但是执行操作的时间交给具体实现来决定。&lt;/p&gt;
     
     </summary>
     
@@ -189,7 +190,7 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
     <link href="http://biezhi.me/2017/07/17/keep-up-with-java8-lambda.html"/>
     <id>http://biezhi.me/2017/07/17/keep-up-with-java8-lambda.html</id>
     <published>2017-07-16T16:00:00.000Z</published>
-    <updated>2017-07-18T15:57:22.000Z</updated>
+    <updated>2017-07-19T06:52:04.000Z</updated>
     
     <content type="html"><![CDATA[<p class="tc">
     <img src="/static/img/article/lambda-expression.png" class="image-bubble" width="500" height="180" title="lambda-expression">
@@ -199,6 +200,7 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
 很长一段时间<code>java</code>被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编程的流行<code>java8</code>种也引入了
 这种编程风格。在此之前我们都在写匿名内部类干这些事，但有时候这不是好的做法，本文中将介绍和使用<code>lambda</code>，
 带你体验函数式编程的魔力。</p>
+<a id="more"></a>
 <h2 id="什么是lambda"><a href="#什么是lambda" class="headerlink" title="什么是lambda?"></a>什么是lambda?</h2><p>lambda表达式是一段可以传递的代码，它的核心思想是将面向对象中的传递数据变成传递行为。
 我们回顾一下在使用java8之前要做的事，之前我们编写一个线程时是这样的：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Runnable r = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"do something."</span>);      </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -313,7 +315,13 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
     <summary type="html">
     
       &lt;p class=&quot;tc&quot;&gt;
-    &lt;img src=&quot;/static/img/article/lambda-expression.png&quot; class=&quot;image-bubble&quot; width=&quot;500&quot; height=&quot;180&quot; title=&quot;lambda-expressi
+    &lt;img src=&quot;/static/img/article/lambda-expression.png&quot; class=&quot;image-bubble&quot; width=&quot;500&quot; height=&quot;180&quot; title=&quot;lambda-expression&quot;&gt;
+&lt;/p&gt;
+
+&lt;p&gt;从&lt;code&gt;java8&lt;/code&gt;出现以来&lt;code&gt;lambda&lt;/code&gt;是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。
+很长一段时间&lt;code&gt;java&lt;/code&gt;被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编程的流行&lt;code&gt;java8&lt;/code&gt;种也引入了
+这种编程风格。在此之前我们都在写匿名内部类干这些事，但有时候这不是好的做法，本文中将介绍和使用&lt;code&gt;lambda&lt;/code&gt;，
+带你体验函数式编程的魔力。&lt;/p&gt;
     
     </summary>
     
@@ -333,7 +341,7 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
     <link href="http://biezhi.me/2017/07/16/keep-up-with-java8.html"/>
     <id>http://biezhi.me/2017/07/16/keep-up-with-java8.html</id>
     <published>2017-07-15T16:00:00.000Z</published>
-    <updated>2017-07-18T15:59:03.000Z</updated>
+    <updated>2017-07-19T06:51:43.000Z</updated>
     
     <content type="html"><![CDATA[<p class="tc">
     <img src="/static/img/article/java8-banner.png" class="image-bubble" width="500" height="300" title="java8">
@@ -342,6 +350,7 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
 <p><code>Java8</code>从<code>2014</code>年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。
 没有去处任何API，我们仍然能兼容以前的代码，新功能中提供了更多的语法和设计，帮助开发者编写更清楚、简洁的代码。
 Java8把函数式编程里一些最好的思想融入到大家熟知的Java语法中，让你用更少的时间写出高效代码。</p>
+<a id="more"></a>
 <p>而目前国内很多开发者的现状还处于<code>Java6</code>的语法之上，这确实没什么问题，可以保证你的企业软件稳定运行下去。
 但时代总是变化的，我们熟悉的Spring框架也对java8做了更好的支持。
 大势所趋，为何不跟上<code>Java8</code>的节奏一起体验现代高级编程语言中的新特性呢？
@@ -376,7 +385,9 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
     &lt;img src=&quot;/static/img/article/java8-banner.png&quot; class=&quot;image-bubble&quot; width=&quot;500&quot; height=&quot;300&quot; title=&quot;java8&quot;&gt;
 &lt;/p&gt;
 
-&lt;p&gt;&lt;co
+&lt;p&gt;&lt;code&gt;Java8&lt;/code&gt;从&lt;code&gt;2014&lt;/code&gt;年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。
+没有去处任何API，我们仍然能兼容以前的代码，新功能中提供了更多的语法和设计，帮助开发者编写更清楚、简洁的代码。
+Java8把函数式编程里一些最好的思想融入到大家熟知的Java语法中，让你用更少的时间写出高效代码。&lt;/p&gt;
     
     </summary>
     
@@ -385,9 +396,9 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
     
       <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
     
-      <category term="系列" scheme="http://biezhi.me/tags/%E7%B3%BB%E5%88%97/"/>
-    
       <category term="lambda" scheme="http://biezhi.me/tags/lambda/"/>
+    
+      <category term="系列" scheme="http://biezhi.me/tags/%E7%B3%BB%E5%88%97/"/>
     
       <category term="stream-api" scheme="http://biezhi.me/tags/stream-api/"/>
     

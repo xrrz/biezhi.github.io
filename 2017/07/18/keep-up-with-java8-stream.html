@@ -20,21 +20,21 @@
     
     
     <meta name="keywords" content="Java8,stream,flatmap,filter,collect">
-    <meta name="description" content="在前面我们简单介绍了lambda表达式，Java8旨在帮助程序员写出更好的代码， 其对核心类库的改进也是关键的一部分，Stream是Java8种处理集合的抽象概念， 它可以指定你希望对集合的操作，但是执行操作的时间交给具体实现来决定。 为什么需要Stream?Java语言中集合是使用最多的API，几乎每个Java程序都会用到集合操作， 这里的Stream和IO中的Stream不同，它提供了对集合操">
+    <meta name="description" content="在前面我们简单介绍了lambda表达式，Java8旨在帮助程序员写出更好的代码， 其对核心类库的改进也是关键的一部分，Stream是Java8种处理集合的抽象概念， 它可以指定你希望对集合的操作，但是执行操作的时间交给具体实现来决定。">
 <meta name="keywords" content="Java8,stream,flatmap,filter,collect">
 <meta property="og:type" content="article">
 <meta property="og:title" content="跟上Java8 - Stream API快速入门">
 <meta property="og:url" content="http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html">
 <meta property="og:site_name" content="王爵的技术博客">
-<meta property="og:description" content="在前面我们简单介绍了lambda表达式，Java8旨在帮助程序员写出更好的代码， 其对核心类库的改进也是关键的一部分，Stream是Java8种处理集合的抽象概念， 它可以指定你希望对集合的操作，但是执行操作的时间交给具体实现来决定。 为什么需要Stream?Java语言中集合是使用最多的API，几乎每个Java程序都会用到集合操作， 这里的Stream和IO中的Stream不同，它提供了对集合操">
+<meta property="og:description" content="在前面我们简单介绍了lambda表达式，Java8旨在帮助程序员写出更好的代码， 其对核心类库的改进也是关键的一部分，Stream是Java8种处理集合的抽象概念， 它可以指定你希望对集合的操作，但是执行操作的时间交给具体实现来决定。">
 <meta property="og:image" content="http://biezhi.me/static/img/article/java8-stream-class.png">
 <meta property="og:image" content="http://biezhi.me/static/img/article/java8-filter.png">
 <meta property="og:image" content="http://biezhi.me/static/img/article/java8-map.png">
 <meta property="og:image" content="http://biezhi.me/static/img/article/java8-flatmap.png">
-<meta property="og:updated_time" content="2017-07-19T06:50:39.000Z">
+<meta property="og:updated_time" content="2017-07-19T06:52:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跟上Java8 - Stream API快速入门">
-<meta name="twitter:description" content="在前面我们简单介绍了lambda表达式，Java8旨在帮助程序员写出更好的代码， 其对核心类库的改进也是关键的一部分，Stream是Java8种处理集合的抽象概念， 它可以指定你希望对集合的操作，但是执行操作的时间交给具体实现来决定。 为什么需要Stream?Java语言中集合是使用最多的API，几乎每个Java程序都会用到集合操作， 这里的Stream和IO中的Stream不同，它提供了对集合操">
+<meta name="twitter:description" content="在前面我们简单介绍了lambda表达式，Java8旨在帮助程序员写出更好的代码， 其对核心类库的改进也是关键的一部分，Stream是Java8种处理集合的抽象概念， 它可以指定你希望对集合的操作，但是执行操作的时间交给具体实现来决定。">
 <meta name="twitter:image" content="http://biezhi.me/static/img/article/java8-stream-class.png">
     
         <link rel="alternate" type="application/atom+xml" title="王爵的技术博客" href="/atom.xml">
@@ -208,6 +208,7 @@
             <p>在前面我们简单介绍了<code>lambda</code>表达式，Java8旨在帮助程序员写出更好的代码，
 其对核心类库的改进也是关键的一部分，<code>Stream</code>是Java8种处理集合的抽象概念，
 它可以指定你希望对集合的操作，但是执行操作的时间交给具体实现来决定。</p>
+<a id="more"></a>
 <h2 id="为什么需要Stream"><a href="#为什么需要Stream" class="headerlink" title="为什么需要Stream?"></a>为什么需要Stream?</h2><p>Java语言中集合是使用最多的API，几乎每个Java程序都会用到集合操作，
 这里的Stream和IO中的Stream不同，它提供了对集合操作的增强，极大的提高了操作集合对象的便利性。</p>
 <p>集合对于大多数编程任务而言都是基本的，为了解释集合是怎么工作，我们想象一下当下最火的外卖APP，
@@ -390,7 +391,8 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html&title=《跟上Java8 - Stream API快速入门》 — 王爵的技术博客&source=biezhi,王爵nice,github,blade,tale,java程序员" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html&title=《跟上Java8 - Stream API快速入门》 — 王爵的技术博客&source=在前面我们简单介绍了lambda表达式，Java8旨在帮助程序员写出更好的代码，
+其对核心类库的改进也是关键的一部分，Stream是Java8种处理集合的..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -545,7 +547,8 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html&title=《跟上Java8 - Stream API快速入门》 — 王爵的技术博客&source=biezhi,王爵nice,github,blade,tale,java程序员" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html&title=《跟上Java8 - Stream API快速入门》 — 王爵的技术博客&source=在前面我们简单介绍了lambda表达式，Java8旨在帮助程序员写出更好的代码，
+其对核心类库的改进也是关键的一部分，Stream是Java8种处理集合的..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
