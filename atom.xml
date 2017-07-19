@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://biezhi.me/"/>
-  <updated>2017-07-19T06:24:33.000Z</updated>
+  <updated>2017-07-19T06:30:11.000Z</updated>
   <id>http://biezhi.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html"/>
     <id>http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html</id>
     <published>2017-07-17T16:00:00.000Z</published>
-    <updated>2017-07-19T06:24:33.000Z</updated>
+    <updated>2017-07-19T06:30:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>在前面我们简单介绍了<code>lambda</code>表达式，Java8旨在帮助程序员写出更好的代码，
 其对核心类库的改进也是关键的一部分，<code>Stream</code>是Java8种处理集合的抽象概念，
@@ -123,6 +123,8 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;Property&gt; properties = properties.stream()</div><div class="line">            .sorted(Comparator.comparingInt(x -&gt; x.distance))</div><div class="line">            .limit(<span class="number">2</span>)</div><div class="line">            .collect(Collectors.toList());</div></pre></td></tr></table></figure>
 <p><strong>获取所有店铺的名称</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;String&gt; names = properties.stream()</div><div class="line">                      .map(p -&gt; p.name)</div><div class="line">                      .collect(Collectors.toList());</div></pre></td></tr></table></figure>
+<p><strong>获取每个店铺的价格等级</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Map&lt;String, Integer&gt; map = properties.stream()</div><div class="line">        .collect(Collectors.toMap(Property::getName, Property::getPriceLevel));</div></pre></td></tr></table></figure>
 <h2 id="并行数据处理"><a href="#并行数据处理" class="headerlink" title="并行数据处理"></a>并行数据处理</h2>]]></content>
     
     <summary type="html">

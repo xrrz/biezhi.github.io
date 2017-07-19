@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://biezhi.me/static/img/article/java8-filter.png">
 <meta property="og:image" content="http://biezhi.me/static/img/article/java8-map.png">
 <meta property="og:image" content="http://biezhi.me/static/img/article/java8-flatmap.png">
-<meta property="og:updated_time" content="2017-07-19T06:24:33.000Z">
+<meta property="og:updated_time" content="2017-07-19T06:30:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跟上Java8 - Stream API快速入门">
 <meta name="twitter:description" content="在前面我们简单介绍了lambda表达式，Java8旨在帮助程序员写出更好的代码， 其对核心类库的改进也是关键的一部分，Stream是Java8种处理集合的抽象概念， 它可以指定你希望对集合的操作，但是执行操作的时间交给具体实现来决定。 为什么需要Stream?Java语言中集合是使用最多的API，几乎每个Java程序都会用到集合操作， 这里的Stream和IO中的Stream不同，它提供了对集合操">
@@ -306,6 +306,8 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;Property&gt; properties = properties.stream()</div><div class="line">            .sorted(Comparator.comparingInt(x -&gt; x.distance))</div><div class="line">            .limit(<span class="number">2</span>)</div><div class="line">            .collect(Collectors.toList());</div></pre></td></tr></table></figure>
 <p><strong>获取所有店铺的名称</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;String&gt; names = properties.stream()</div><div class="line">                      .map(p -&gt; p.name)</div><div class="line">                      .collect(Collectors.toList());</div></pre></td></tr></table></figure>
+<p><strong>获取每个店铺的价格等级</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Map&lt;String, Integer&gt; map = properties.stream()</div><div class="line">        .collect(Collectors.toMap(Property::getName, Property::getPriceLevel));</div></pre></td></tr></table></figure>
 <h2 id="并行数据处理"><a href="#并行数据处理" class="headerlink" title="并行数据处理"></a>并行数据处理</h2>
         </div>
 
