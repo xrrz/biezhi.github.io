@@ -438,7 +438,7 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
     <link href="http://biezhi.me/2017/07/16/keep-up-with-java8.html"/>
     <id>http://biezhi.me/2017/07/16/keep-up-with-java8.html</id>
     <published>2017-07-15T16:00:00.000Z</published>
-    <updated>2017-07-19T16:57:32.000Z</updated>
+    <updated>2017-07-19T17:02:03.000Z</updated>
     
     <content type="html"><![CDATA[<figure class="image-bubble">
                 <div class="img-lightbox">
@@ -472,7 +472,7 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
 <li><a href="/2017/07/21/keep-up-with-java8-features.html">跟上Java8 - 你忽略了的新特性</a></li>
 <li><a href="/2017/07/22/keep-up-with-java8-concurrent.html">跟上Java8 - 使用lambda并发编程</a></li>
 <li><a href="/2017/07/23/keep-up-with-java8-tips.html">跟上Java8 - 七七八八的黑科技</a></li>
-<li><a href="/2017/07/23/keep-up-with-java8-tips.html">跟上Java8 - 七七八八的黑科技</a></li>
+<li><a href="/2017/07/23/keep-up-with-java8-tips.html">跟上Java8 - 优化工作中那些屎代码</a></li>
 <li><a href="/2017/07/24/keep-up-with-java8-complex-examples.html">跟上Java8 - 复杂一点的例子</a></li>
 </ol>
 <h2 id="资料分享"><a href="#资料分享" class="headerlink" title="资料分享"></a>资料分享</h2><ul>
