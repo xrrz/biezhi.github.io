@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://biezhi.me/"/>
-  <updated>2017-07-19T09:09:54.000Z</updated>
+  <updated>2017-07-19T11:37:02.000Z</updated>
   <id>http://biezhi.me/</id>
   
   <author>
@@ -20,9 +20,23 @@
     <link href="http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html"/>
     <id>http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html</id>
     <published>2017-07-18T16:00:00.000Z</published>
-    <updated>2017-07-19T09:09:54.000Z</updated>
+    <updated>2017-07-19T11:37:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-function-programing.jpg" alt="函数式编程" width="600" height="400" title="">
+                </div>
+                <div class="image-caption">函数式编程</div>
+            </figure>
+]]></content>
     
     <summary type="html">
+    
+      &lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                   
     
     </summary>
     
@@ -40,7 +54,7 @@
     <link href="http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html"/>
     <id>http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html</id>
     <published>2017-07-17T16:00:00.000Z</published>
-    <updated>2017-07-19T06:52:04.000Z</updated>
+    <updated>2017-07-19T11:46:24.000Z</updated>
     
     <content type="html"><![CDATA[<p>在前面我们简单介绍了<code>lambda</code>表达式，Java8旨在帮助程序员写出更好的代码，
 其对核心类库的改进也是关键的一部分，<code>Stream</code>是Java8种处理集合的抽象概念，
@@ -89,10 +103,13 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">String content = Files.readAllLines(Paths.get(<span class="string">"/home/biezhi/a.txt"</span>)).stream()</div><div class="line">            .collect(Collectors.joining(<span class="string">"\n"</span>));</div></pre></td></tr></table></figure>
 <p>这里的<code>collect</code>是后面要讲解的<strong>收集器</strong>，对<code>Stream</code>进行了处理后得到一个文本文件的内容。</p>
 <p>JDK8也为我们提供了一些便捷的<code>Stream</code>相关类库:</p>
-<p>
-    <img src="/static/img/article/java8-stream-class.png" class="image-bubble" width="320" height="500" title="java8提供的Stream类库">
-</p>
-
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-stream-class.png" alt="java8提供的Stream类库" width="320" height="500" title="">
+                </div>
+                <div class="image-caption">java8提供的Stream类库</div>
+            </figure>
 <p>创建一个流是很简单的，下面我们试试用创建好的<code>Stream</code>做一些操作吧。</p>
 <h2 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h2><p><code>java.util.stream.Stream</code>中定义了许多流操作的方法，为了更好的理解<code>Stream API</code>掌握它常用的操作非常重要。
 流的操作其实可以分为两类：<strong>处理操作</strong>、<strong>聚合操作</strong>。</p>
@@ -102,28 +119,37 @@
 </ul>
 <h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p><code>filter</code>看名字也知道是过滤的意思，我们通常在筛选数据的时候用到，频率非常高。
 <code>filter</code>方法的参数是<code>Predicate&lt;T&gt; predicate</code>即一个从<code>T</code>到boolean的函数。</p>
-<p>
-    <img src="/static/img/article/java8-filter.png" class="image-bubble" width="300" height="200">
-</p>
-
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-filter.png" alt="" width="300" height="200" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p><strong>筛选出距离我在1000米内的店铺</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">properties.stream()</div><div class="line">            .filter(p -&gt; p.distance &lt; <span class="number">1000</span>)</div></pre></td></tr></table></figure>
 <p><strong>筛选出名称大于5个字的店铺</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">properties.stream()</div><div class="line">            .filter(p -&gt; p.name.length() &gt; <span class="number">5</span>);</div></pre></td></tr></table></figure>
 <h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>有时候我们需要将流中处理的数据类型进行转换，这时候就可以使用<code>map</code>方法来完成，将流中的值转换为一个新的流。</p>
-<p>
-    <img src="/static/img/article/java8-map.png" class="image-bubble" width="300" height="200">
-</p>
-
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-map.png" alt="" width="300" height="200" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p><strong>列出所有店铺的名称</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">properties.stream()</div><div class="line">            .map(p -&gt; p.name);</div></pre></td></tr></table></figure>
 <p>传给<code>map</code>的<code>lambda</code>表达式接收一个<code>Property</code>类型的参数，返回一个<code>String</code>。
 参数和返回值不必属于同一种类型，但是<code>lambda</code>表达式必须是<code>Function</code>接口的一个实例。</p>
 <h3 id="flatMap"><a href="#flatMap" class="headerlink" title="flatMap"></a>flatMap</h3><p>有时候我们会遇到提取子流的操作，这种情况用的不多但是遇到<code>flatMap</code>将变得更容易处理。</p>
-<p>
-    <img src="/static/img/article/java8-flatmap.png" class="image-bubble" width="300" height="200">
-</p>
-
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-flatmap.png" alt="" width="300" height="200" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>例如我们有一个<code>List&lt;List&lt;String&gt;&gt;</code>结构的数据：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;List&lt;String&gt;&gt; lists = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        lists.add(Arrays.asList(<span class="string">"apple"</span>, <span class="string">"click"</span>));</div><div class="line">        lists.add(Arrays.asList(<span class="string">"boss"</span>, <span class="string">"dig"</span>, <span class="string">"qq"</span>, <span class="string">"vivo"</span>));</div><div class="line">        lists.add(Arrays.asList(<span class="string">"c#"</span>, <span class="string">"biezhi"</span>));</div></pre></td></tr></table></figure>
 <p>要做的操作是获取这些数据中长度大于2的单词个数</p>
@@ -210,12 +236,15 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
     <link href="http://biezhi.me/2017/07/17/keep-up-with-java8-lambda.html"/>
     <id>http://biezhi.me/2017/07/17/keep-up-with-java8-lambda.html</id>
     <published>2017-07-16T16:00:00.000Z</published>
-    <updated>2017-07-19T06:52:04.000Z</updated>
+    <updated>2017-07-19T11:38:38.000Z</updated>
     
-    <content type="html"><![CDATA[<p class="tc">
-    <img src="/static/img/article/lambda-expression.png" class="image-bubble" width="500" height="180" title="lambda-expression">
-</p>
-
+    <content type="html"><![CDATA[<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/lambda-expression.png" alt="lambda表达式" width="500" height="180" title="">
+                </div>
+                <div class="image-caption">lambda表达式</div>
+            </figure>
 <p>从<code>java8</code>出现以来<code>lambda</code>是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。
 很长一段时间<code>java</code>被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编程的流行<code>java8</code>种也引入了
 这种编程风格。在此之前我们都在写匿名内部类干这些事，但有时候这不是好的做法，本文中将介绍和使用<code>lambda</code>，
@@ -260,10 +289,13 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
 判断是否是成人的方法，是无法将 <strong>判断</strong> 共用的。而在本例只，你要做的是将 <strong>行为</strong> (判断是否是成人，或者是判断是否大于30岁)
 传递进去，函数式接口告诉你结果是什么。</p>
 <p>实际上诸如上述例子中的接口，伟大的jdk设计者为我们准备了<code>java.util.function</code>包</p>
-<div>
-    <img src="/static/img/article/java8-util-function-package.png" class="image-bubble" width="300" height="500" title="java8-util-function-package">
-</div>
-
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-util-function-package.png" alt="" width="300" height="500" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>我们前面写的<code>Predicate</code>函数式接口也是JDK种的一个实现，他们大致分为以下几类：</p>
 <table>
 <thead>
@@ -334,10 +366,13 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
     
     <summary type="html">
     
-      &lt;p class=&quot;tc&quot;&gt;
-    &lt;img src=&quot;/static/img/article/lambda-expression.png&quot; class=&quot;image-bubble&quot; width=&quot;500&quot; height=&quot;180&quot; title=&quot;lambda-expression&quot;&gt;
-&lt;/p&gt;
-
+      &lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;/static/img/article/lambda-expression.png&quot; alt=&quot;lambda表达式&quot; width=&quot;500&quot; height=&quot;180&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;lambda表达式&lt;/div&gt;
+            &lt;/figure&gt;
 &lt;p&gt;从&lt;code&gt;java8&lt;/code&gt;出现以来&lt;code&gt;lambda&lt;/code&gt;是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。
 很长一段时间&lt;code&gt;java&lt;/code&gt;被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编程的流行&lt;code&gt;java8&lt;/code&gt;种也引入了
 这种编程风格。在此之前我们都在写匿名内部类干这些事，但有时候这不是好的做法，本文中将介绍和使用&lt;code&gt;lambda&lt;/code&gt;，
@@ -361,12 +396,15 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
     <link href="http://biezhi.me/2017/07/16/keep-up-with-java8.html"/>
     <id>http://biezhi.me/2017/07/16/keep-up-with-java8.html</id>
     <published>2017-07-15T16:00:00.000Z</published>
-    <updated>2017-07-19T06:51:43.000Z</updated>
+    <updated>2017-07-19T11:38:38.000Z</updated>
     
-    <content type="html"><![CDATA[<p class="tc">
-    <img src="/static/img/article/java8-banner.png" class="image-bubble" width="500" height="300" title="java8">
-</p>
-
+    <content type="html"><![CDATA[<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-banner.png" alt="开启Java8之路" width="500" height="300" title="">
+                </div>
+                <div class="image-caption">开启Java8之路</div>
+            </figure>
 <p><code>Java8</code>从<code>2014</code>年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。
 没有去处任何API，我们仍然能兼容以前的代码，新功能中提供了更多的语法和设计，帮助开发者编写更清楚、简洁的代码。
 Java8把函数式编程里一些最好的思想融入到大家熟知的Java语法中，让你用更少的时间写出高效代码。</p>
@@ -401,10 +439,13 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
     
     <summary type="html">
     
-      &lt;p class=&quot;tc&quot;&gt;
-    &lt;img src=&quot;/static/img/article/java8-banner.png&quot; class=&quot;image-bubble&quot; width=&quot;500&quot; height=&quot;300&quot; title=&quot;java8&quot;&gt;
-&lt;/p&gt;
-
+      &lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;/static/img/article/java8-banner.png&quot; alt=&quot;开启Java8之路&quot; width=&quot;500&quot; height=&quot;300&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;开启Java8之路&lt;/div&gt;
+            &lt;/figure&gt;
 &lt;p&gt;&lt;code&gt;Java8&lt;/code&gt;从&lt;code&gt;2014&lt;/code&gt;年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。
 没有去处任何API，我们仍然能兼容以前的代码，新功能中提供了更多的语法和设计，帮助开发者编写更清楚、简洁的代码。
 Java8把函数式编程里一些最好的思想融入到大家熟知的Java语法中，让你用更少的时间写出高效代码。&lt;/p&gt;

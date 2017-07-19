@@ -20,19 +20,19 @@
     
     
     <meta name="keywords" content="Java8,lambda,functional-interface">
-    <meta name="description" content="从java8出现以来lambda是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。 很长一段时间java被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编程的流行java8种也引入了 这种编程风格。在此之前我们都在写匿名内部类干这些事，但有时候这不是好的做法，本文中将介绍和使用lambda， 带你体验函数式编程的魔力。">
+    <meta name="description" content="lambda表达式              从java8出现以来lambda是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。 很长一段时间java被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编">
 <meta name="keywords" content="Java8,lambda,functional-interface">
 <meta property="og:type" content="article">
 <meta property="og:title" content="跟上Java8 - 了解lambda">
 <meta property="og:url" content="http://biezhi.me/2017/07/17/keep-up-with-java8-lambda.html">
 <meta property="og:site_name" content="王爵的技术博客">
-<meta property="og:description" content="从java8出现以来lambda是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。 很长一段时间java被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编程的流行java8种也引入了 这种编程风格。在此之前我们都在写匿名内部类干这些事，但有时候这不是好的做法，本文中将介绍和使用lambda， 带你体验函数式编程的魔力。">
+<meta property="og:description" content="lambda表达式              从java8出现以来lambda是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。 很长一段时间java被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编">
 <meta property="og:image" content="http://biezhi.me/static/img/article/lambda-expression.png">
 <meta property="og:image" content="http://biezhi.me/static/img/article/java8-util-function-package.png">
-<meta property="og:updated_time" content="2017-07-19T06:52:04.000Z">
+<meta property="og:updated_time" content="2017-07-19T11:38:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跟上Java8 - 了解lambda">
-<meta name="twitter:description" content="从java8出现以来lambda是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。 很长一段时间java被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编程的流行java8种也引入了 这种编程风格。在此之前我们都在写匿名内部类干这些事，但有时候这不是好的做法，本文中将介绍和使用lambda， 带你体验函数式编程的魔力。">
+<meta name="twitter:description" content="lambda表达式              从java8出现以来lambda是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。 很长一段时间java被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编">
 <meta name="twitter:image" content="http://biezhi.me/static/img/article/lambda-expression.png">
     
         <link rel="alternate" type="application/atom+xml" title="王爵的技术博客" href="/atom.xml">
@@ -203,10 +203,13 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p class="tc">
-    <img src="/static/img/article/lambda-expression.png" class="image-bubble" width="500" height="180" title="lambda-expression">
-</p>
-
+            <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/lambda-expression.png" alt="lambda表达式" width="500" height="180" title="">
+                </div>
+                <div class="image-caption">lambda表达式</div>
+            </figure>
 <p>从<code>java8</code>出现以来<code>lambda</code>是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。
 很长一段时间<code>java</code>被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编程的流行<code>java8</code>种也引入了
 这种编程风格。在此之前我们都在写匿名内部类干这些事，但有时候这不是好的做法，本文中将介绍和使用<code>lambda</code>，
@@ -251,10 +254,13 @@
 判断是否是成人的方法，是无法将 <strong>判断</strong> 共用的。而在本例只，你要做的是将 <strong>行为</strong> (判断是否是成人，或者是判断是否大于30岁)
 传递进去，函数式接口告诉你结果是什么。</p>
 <p>实际上诸如上述例子中的接口，伟大的jdk设计者为我们准备了<code>java.util.function</code>包</p>
-<div>
-    <img src="/static/img/article/java8-util-function-package.png" class="image-bubble" width="300" height="500" title="java8-util-function-package">
-</div>
-
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-util-function-package.png" alt="" width="300" height="500" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>我们前面写的<code>Predicate</code>函数式接口也是JDK种的一个实现，他们大致分为以下几类：</p>
 <table>
 <thead>
@@ -370,11 +376,11 @@
       </li>
       <li>
         <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/17/keep-up-with-java8-lambda.html&title=《跟上Java8 - 了解lambda》 — 王爵的技术博客&source=
-    
-
-
-从java8出现以来lambda是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。
-很长一段时间java被吐槽是冗余和缺乏函数..." data-title=" QQ">
+                
+                    
+                    
+                
+..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -537,11 +543,11 @@
       </li>
       <li>
         <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/17/keep-up-with-java8-lambda.html&title=《跟上Java8 - 了解lambda》 — 王爵的技术博客&source=
-    
-
-
-从java8出现以来lambda是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。
-很长一段时间java被吐槽是冗余和缺乏函数..." data-title=" QQ">
+                
+                    
+                    
+                
+..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

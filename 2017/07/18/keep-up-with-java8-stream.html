@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://biezhi.me/static/img/article/java8-filter.png">
 <meta property="og:image" content="http://biezhi.me/static/img/article/java8-map.png">
 <meta property="og:image" content="http://biezhi.me/static/img/article/java8-flatmap.png">
-<meta property="og:updated_time" content="2017-07-19T06:52:04.000Z">
+<meta property="og:updated_time" content="2017-07-19T11:46:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跟上Java8 - Stream API快速入门">
 <meta name="twitter:description" content="在前面我们简单介绍了lambda表达式，Java8旨在帮助程序员写出更好的代码， 其对核心类库的改进也是关键的一部分，Stream是Java8种处理集合的抽象概念， 它可以指定你希望对集合的操作，但是执行操作的时间交给具体实现来决定。">
@@ -252,10 +252,13 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">String content = Files.readAllLines(Paths.get(<span class="string">"/home/biezhi/a.txt"</span>)).stream()</div><div class="line">            .collect(Collectors.joining(<span class="string">"\n"</span>));</div></pre></td></tr></table></figure>
 <p>这里的<code>collect</code>是后面要讲解的<strong>收集器</strong>，对<code>Stream</code>进行了处理后得到一个文本文件的内容。</p>
 <p>JDK8也为我们提供了一些便捷的<code>Stream</code>相关类库:</p>
-<p>
-    <img src="/static/img/article/java8-stream-class.png" class="image-bubble" width="320" height="500" title="java8提供的Stream类库">
-</p>
-
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-stream-class.png" alt="java8提供的Stream类库" width="320" height="500" title="">
+                </div>
+                <div class="image-caption">java8提供的Stream类库</div>
+            </figure>
 <p>创建一个流是很简单的，下面我们试试用创建好的<code>Stream</code>做一些操作吧。</p>
 <h2 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h2><p><code>java.util.stream.Stream</code>中定义了许多流操作的方法，为了更好的理解<code>Stream API</code>掌握它常用的操作非常重要。
 流的操作其实可以分为两类：<strong>处理操作</strong>、<strong>聚合操作</strong>。</p>
@@ -265,28 +268,37 @@
 </ul>
 <h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p><code>filter</code>看名字也知道是过滤的意思，我们通常在筛选数据的时候用到，频率非常高。
 <code>filter</code>方法的参数是<code>Predicate&lt;T&gt; predicate</code>即一个从<code>T</code>到boolean的函数。</p>
-<p>
-    <img src="/static/img/article/java8-filter.png" class="image-bubble" width="300" height="200">
-</p>
-
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-filter.png" alt="" width="300" height="200" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p><strong>筛选出距离我在1000米内的店铺</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">properties.stream()</div><div class="line">            .filter(p -&gt; p.distance &lt; <span class="number">1000</span>)</div></pre></td></tr></table></figure>
 <p><strong>筛选出名称大于5个字的店铺</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">properties.stream()</div><div class="line">            .filter(p -&gt; p.name.length() &gt; <span class="number">5</span>);</div></pre></td></tr></table></figure>
 <h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>有时候我们需要将流中处理的数据类型进行转换，这时候就可以使用<code>map</code>方法来完成，将流中的值转换为一个新的流。</p>
-<p>
-    <img src="/static/img/article/java8-map.png" class="image-bubble" width="300" height="200">
-</p>
-
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-map.png" alt="" width="300" height="200" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p><strong>列出所有店铺的名称</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">properties.stream()</div><div class="line">            .map(p -&gt; p.name);</div></pre></td></tr></table></figure>
 <p>传给<code>map</code>的<code>lambda</code>表达式接收一个<code>Property</code>类型的参数，返回一个<code>String</code>。
 参数和返回值不必属于同一种类型，但是<code>lambda</code>表达式必须是<code>Function</code>接口的一个实例。</p>
 <h3 id="flatMap"><a href="#flatMap" class="headerlink" title="flatMap"></a>flatMap</h3><p>有时候我们会遇到提取子流的操作，这种情况用的不多但是遇到<code>flatMap</code>将变得更容易处理。</p>
-<p>
-    <img src="/static/img/article/java8-flatmap.png" class="image-bubble" width="300" height="200">
-</p>
-
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-flatmap.png" alt="" width="300" height="200" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>例如我们有一个<code>List&lt;List&lt;String&gt;&gt;</code>结构的数据：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;List&lt;String&gt;&gt; lists = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        lists.add(Arrays.asList(<span class="string">"apple"</span>, <span class="string">"click"</span>));</div><div class="line">        lists.add(Arrays.asList(<span class="string">"boss"</span>, <span class="string">"dig"</span>, <span class="string">"qq"</span>, <span class="string">"vivo"</span>));</div><div class="line">        lists.add(Arrays.asList(<span class="string">"c#"</span>, <span class="string">"biezhi"</span>));</div></pre></td></tr></table></figure>
 <p>要做的操作是获取这些数据中长度大于2的单词个数</p>
