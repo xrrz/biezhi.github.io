@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://biezhi.me/"/>
-  <updated>2017-07-19T06:30:11.000Z</updated>
+  <updated>2017-07-19T06:50:39.000Z</updated>
   <id>http://biezhi.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html"/>
     <id>http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html</id>
     <published>2017-07-17T16:00:00.000Z</published>
-    <updated>2017-07-19T06:30:11.000Z</updated>
+    <updated>2017-07-19T06:50:39.000Z</updated>
     
     <content type="html"><![CDATA[<p>在前面我们简单介绍了<code>lambda</code>表达式，Java8旨在帮助程序员写出更好的代码，
 其对核心类库的改进也是关键的一部分，<code>Stream</code>是Java8种处理集合的抽象概念，
@@ -125,7 +125,41 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;String&gt; names = properties.stream()</div><div class="line">                      .map(p -&gt; p.name)</div><div class="line">                      .collect(Collectors.toList());</div></pre></td></tr></table></figure>
 <p><strong>获取每个店铺的价格等级</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Map&lt;String, Integer&gt; map = properties.stream()</div><div class="line">        .collect(Collectors.toMap(Property::getName, Property::getPriceLevel));</div></pre></td></tr></table></figure>
-<h2 id="并行数据处理"><a href="#并行数据处理" class="headerlink" title="并行数据处理"></a>并行数据处理</h2>]]></content>
+<p><strong>所有价格等级的店铺列表</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Map&lt;Integer, List&lt;Property&gt;&gt; priceMap = properties.stream()</div><div class="line">                .collect(Collectors.groupingBy(Property::getPriceLevel));</div></pre></td></tr></table></figure>
+<h2 id="并行数据处理"><a href="#并行数据处理" class="headerlink" title="并行数据处理"></a>并行数据处理</h2><h3 id="并行和并发"><a href="#并行和并发" class="headerlink" title="并行和并发"></a>并行和并发</h3><p>并发是两个任务共享时间段，并行则是两个任务在同一时间发生，比如运行在多核CPU上。
+如果一个程序要运行两个任务，并且只有一个CPU给它们分配了不同的时间片，那么这就是并发，而不是并行。</p>
+<blockquote>
+<p>并行化是指为缩短任务执行时间，将一个任务分解成几部分，然后并行执行。</p>
+</blockquote>
+<p>这和顺序执行的任务量是一样的，区别就像用更多的马来拉车，花费的时间自然减少了。
+实际上，和顺序执行相比，并行化执行任务时，CPU承载的工作量更大。</p>
+<blockquote>
+<p>数据并行化是指将数据分成块，为每块数据分配单独的处理单元。</p>
+</blockquote>
+<p>还是拿马拉车那个例子打比方，就像从车里取出一些货物，放到另一辆车上，两辆马车都沿着同样的路径到达目的地。</p>
+<p>当需要在大量数据上执行同样的操作时，数据并行化很管用。
+它将问题分解为可在多块数据上求解的形式，然后对每块数据执行运算，最后将各数据块上得到的结果汇总，从而获得最终答案。</p>
+<p>人们经常拿任务并行化和数据并行化做比较，在任务并行化中，线程不同，工作各异。
+我们最常遇到的JavaEE应用容器便是任务并行化的例子之一，每个线程不光可以为不同用户服务，
+还可以为同一个用户执行不同的任务，比如登录或往购物车添加商品。</p>
+<h3 id="Stream并行流"><a href="#Stream并行流" class="headerlink" title="Stream并行流"></a>Stream并行流</h3><p>流使得计算变得容易，它的操作也非常简单，但你需要遵守一些约定。默认情况下我们使用集合的<code>stream</code>方法
+创建的是一个串行流，你有两种办法让他变成并行流。</p>
+<ol>
+<li>调用<code>Stream</code>对象的<code>parallel</code>方法</li>
+<li>创建流的时候调用<code>parallelStream</code>而不是<code>stream</code>方法</li>
+</ol>
+<p>我们来用具体的例子来解释串行和并行流</p>
+<p><strong>串行化计算</strong></p>
+<p>筛选出价格等级小于4，按照距离排序的2个店铺名</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">properties.stream()</div><div class="line">            .filter(p -&gt; p.priceLevel &lt; <span class="number">4</span>)</div><div class="line">            .sorted(Comparator.comparingInt(Property::getDistance))</div><div class="line">            .map(Property::getName)</div><div class="line">            .limit(<span class="number">2</span>)</div><div class="line">            .collect(Collectors.toList());</div></pre></td></tr></table></figure>
+<p>调用 parallelStream 方法即能并行处理</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">properties.parallelStream()</div><div class="line">            .filter(p -&gt; p.priceLevel &lt; <span class="number">4</span>)</div><div class="line">            .sorted(Comparator.comparingInt(Property::getDistance))</div><div class="line">            .map(Property::getName)</div><div class="line">            .limit(<span class="number">2</span>)</div><div class="line">            .collect(Collectors.toList());</div></pre></td></tr></table></figure>
+<p>读到这里，大家的第一反应可能是立即将手头代码中的<code>stream</code>方法替换为<code>parallelStream</code>方法，
+因为这样做简直太简单了！先别忙，为了将硬件物尽其用，利用好并行化非常重要，但流类库提供的数据并行化只是其中的一种形式。</p>
+<p>我们先要问自己一个问题：<code>并行化运行基于流的代码是否比串行化运行更快？</code>这不是一个简单的问题。
+回到前面的例子，哪种方式花的时间更多取决于串行或并行化运行时的环境。</p>
+]]></content>
     
     <summary type="html">
     
