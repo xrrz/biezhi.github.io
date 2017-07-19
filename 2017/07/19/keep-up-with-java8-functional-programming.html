@@ -13,26 +13,24 @@
     
     
     
-    <title>跟上Java8系列文章 - 带你实战Java8 | 王爵的技术博客 | 一个后端程序员的笔记</title>
+    <title>跟上Java8 - 函数式编程 | 王爵的技术博客 | 一个后端程序员的笔记</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Java8,系列,lambda,stream-api">
-    <meta name="description" content="Java8从2014年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。 没有去处任何API，我们仍然能兼容以前的代码，新功能中提供了更多的语法和设计，帮助开发者编写更清楚、简洁的代码。 Java8把函数式编程里一些最好的思想融入到大家熟知的Java语法中，让你用更少的时间写出高效代码。">
-<meta name="keywords" content="Java8,系列,lambda,stream-api">
+    <meta name="keywords" content="Java8,函数式">
+    <meta name="description" content="biezhi,王爵nice,github,blade,tale,java程序员">
+<meta name="keywords" content="Java8,函数式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="跟上Java8系列文章 - 带你实战Java8">
-<meta property="og:url" content="http://biezhi.me/2017/07/16/keep-up-with-java8.html">
+<meta property="og:title" content="跟上Java8 - 函数式编程">
+<meta property="og:url" content="http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html">
 <meta property="og:site_name" content="王爵的技术博客">
-<meta property="og:description" content="Java8从2014年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。 没有去处任何API，我们仍然能兼容以前的代码，新功能中提供了更多的语法和设计，帮助开发者编写更清楚、简洁的代码。 Java8把函数式编程里一些最好的思想融入到大家熟知的Java语法中，让你用更少的时间写出高效代码。">
-<meta property="og:image" content="http://biezhi.me/static/img/article/java8-banner.png">
-<meta property="og:updated_time" content="2017-07-19T06:51:43.000Z">
+<meta property="og:description" content="biezhi,王爵nice,github,blade,tale,java程序员">
+<meta property="og:updated_time" content="2017-07-19T09:09:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="跟上Java8系列文章 - 带你实战Java8">
-<meta name="twitter:description" content="Java8从2014年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。 没有去处任何API，我们仍然能兼容以前的代码，新功能中提供了更多的语法和设计，帮助开发者编写更清楚、简洁的代码。 Java8把函数式编程里一些最好的思想融入到大家熟知的Java语法中，让你用更少的时间写出高效代码。">
-<meta name="twitter:image" content="http://biezhi.me/static/img/article/java8-banner.png">
+<meta name="twitter:title" content="跟上Java8 - 函数式编程">
+<meta name="twitter:description" content="biezhi,王爵nice,github,blade,tale,java程序员">
     
         <link rel="alternate" type="application/atom+xml" title="王爵的技术博客" href="/atom.xml">
     
@@ -130,7 +128,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">跟上Java8系列文章 - 带你实战Java8</div>
+        <div class="flex-col header-title ellipsis">跟上Java8 - 函数式编程</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -152,11 +150,11 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">跟上Java8系列文章 - 带你实战Java8</h1>
+        <h1 class="title">跟上Java8 - 函数式编程</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-07-15T16:00:00.000Z" itemprop="datePublished" class="page-time">
-  2017-07-16
+                <time datetime="2017-07-18T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-07-19
 </time>
 
 
@@ -174,20 +172,13 @@
 
 <div class="container body-wrap">
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优势"><span class="post-toc-number">1.</span> <span class="post-toc-text">优势</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文章目录"><span class="post-toc-number">2.</span> <span class="post-toc-text">文章目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#资料分享"><span class="post-toc-number">3.</span> <span class="post-toc-text">资料分享</span></a></li></ol>
-        </nav>
-    </aside>
-    
-<article id="post-keep-up-with-java8"
+<article id="post-keep-up-with-java8-functional-programming"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">跟上Java8系列文章 - 带你实战Java8</h1>
+        <h1 class="post-card-title">跟上Java8 - 函数式编程</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-07-16 00:00:00" datetime="2017-07-15T16:00:00.000Z"  itemprop="datePublished">2017-07-16</time>
+            <time class="post-time" title="2017-07-19 00:00:00" datetime="2017-07-18T16:00:00.000Z"  itemprop="datePublished">2017-07-19</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/跟上Java8/">跟上Java8</a></li></ul>
@@ -202,41 +193,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p class="tc">
-    <img src="/static/img/article/java8-banner.png" class="image-bubble" width="500" height="300" title="java8">
-</p>
-
-<p><code>Java8</code>从<code>2014</code>年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。
-没有去处任何API，我们仍然能兼容以前的代码，新功能中提供了更多的语法和设计，帮助开发者编写更清楚、简洁的代码。
-Java8把函数式编程里一些最好的思想融入到大家熟知的Java语法中，让你用更少的时间写出高效代码。</p>
-<a id="more"></a>
-<p>而目前国内很多开发者的现状还处于<code>Java6</code>的语法之上，这确实没什么问题，可以保证你的企业软件稳定运行下去。
-但时代总是变化的，我们熟悉的Spring框架也对java8做了更好的支持。
-大势所趋，为何不跟上<code>Java8</code>的节奏一起体验现代高级编程语言中的新特性呢？
-现在我可以带你深入浅出跟上<code>Java8</code>，这一系列文章写了那些我认为有用所关注的一些内容，如果你对更详细的细节感兴趣可以查阅相关书籍。</p>
-<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><ul>
-<li>lambda表达式</li>
-<li>stream流</li>
-<li>optional</li>
-<li>jvm优化</li>
-<li>兼容老版本</li>
-</ul>
-<h2 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h2><ol>
-<li><a href="/2017/07/17/keep-up-with-java8-lambda.html">跟上Java8 - 了解lambda</a></li>
-<li><a href="/2017/07/18/keep-up-with-java8-stream.html">跟上Java8 - Stream API快速入门</a></li>
-<li><a href="/2017/07/19/keep-up-with-java8-functional-programming.html">跟上Java8 - 函数式编程</a></li>
-<li><a href="/2017/07/20/keep-up-with-java8-datetime.html">跟上Java8 - 日期和时间最实用技巧</a></li>
-<li><a href="/2017/07/21/keep-up-with-java8-features.html">跟上Java8 - 你忽略了的新特性</a></li>
-<li><a href="/2017/07/22/keep-up-with-java8-concurrent.html">跟上Java8 - 使用lambda并发编程</a></li>
-<li><a href="/2017/07/23/keep-up-with-java8-tips.html">跟上Java8 - 七七八八的黑科技</a></li>
-<li><a href="/2017/07/24/keep-up-with-java8-optimizing.html">跟上Java8 - 优化工作中那些屎代码</a></li>
-</ol>
-<h2 id="资料分享"><a href="#资料分享" class="headerlink" title="资料分享"></a>资料分享</h2><ul>
-<li><a href="http://winterbe.com/projects/java8-explorer" target="_blank" rel="external">在线查看Java8新增API</a></li>
-<li><a href="https://github.com/shekhargulati/java8-the-missing-tutorial" target="_blank" rel="external">java8-the-missing-tutorial</a></li>
-<li><a href="https://github.com/winterbe/java8-tutorial" target="_blank" rel="external">java8-tutorial</a></li>
-</ul>
-
+            
         </div>
 
         <blockquote class="post-copyright">
@@ -244,7 +201,7 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
         
 
         
-        原创文章，转载请注明： 转载自<a href="http://biezhi.me" target="_blank">王爵的技术博客</a><br/>本文链接地址：<a href="/2017/07/16/keep-up-with-java8.html" target="_blank" rel="external">http://biezhi.me/2017/07/16/keep-up-with-java8.html</a>
+        原创文章，转载请注明： 转载自<a href="http://biezhi.me" target="_blank">王爵的技术博客</a><br/>本文链接地址：<a href="/2017/07/19/keep-up-with-java8-functional-programming.html" target="_blank" rel="external">http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html</a>
         
     </div>
     <footer>
@@ -264,7 +221,7 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java8/">Java8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lambda/">lambda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stream-api/">stream-api</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系列/">系列</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java8/">Java8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/函数式/">函数式</a></li></ul>
 
 
             
@@ -274,7 +231,7 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://biezhi.me/2017/07/16/keep-up-with-java8.html&title=《跟上Java8系列文章 - 带你实战Java8》 — 王爵的技术博客&pic=http://biezhi.me/img/avatar.png" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html&title=《跟上Java8 - 函数式编程》 — 王爵的技术博客&pic=http://biezhi.me/img/avatar.png" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -284,27 +241,22 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/16/keep-up-with-java8.html&title=《跟上Java8系列文章 - 带你实战Java8》 — 王爵的技术博客&source=
-    
-
-
-Java8从2014年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。
-没有去处任何API，我们仍然能兼容..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html&title=《跟上Java8 - 函数式编程》 — 王爵的技术博客&source=biezhi,王爵nice,github,blade,tale,java程序员" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://biezhi.me/2017/07/16/keep-up-with-java8.html" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《跟上Java8系列文章 - 带你实战Java8》 — 王爵的技术博客&url=http://biezhi.me/2017/07/16/keep-up-with-java8.html&via=http://biezhi.me" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《跟上Java8 - 函数式编程》 — 王爵的技术博客&url=http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html&via=http://biezhi.me" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://biezhi.me/2017/07/16/keep-up-with-java8.html" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -324,21 +276,14 @@ Java8从2014年出现至今已经三年有余，这里发布的新功能是自Ja
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/07/17/keep-up-with-java8-lambda.html" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">跟上Java8 - 了解lambda</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/07/15/hello-world.html" id="post-next" class="post-nav-link">
+      <a href="/2017/07/18/keep-up-with-java8-stream.html" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Hello World</h4>
+        <h4 class="title">跟上Java8 - Stream API快速入门</h4>
       </a>
     </div>
   
@@ -441,7 +386,7 @@ Java8从2014年出现至今已经三年有余，这里发布的新功能是自Ja
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://biezhi.me/2017/07/16/keep-up-with-java8.html&title=《跟上Java8系列文章 - 带你实战Java8》 — 王爵的技术博客&pic=http://biezhi.me/img/avatar.png" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html&title=《跟上Java8 - 函数式编程》 — 王爵的技术博客&pic=http://biezhi.me/img/avatar.png" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -451,27 +396,22 @@ Java8从2014年出现至今已经三年有余，这里发布的新功能是自Ja
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/16/keep-up-with-java8.html&title=《跟上Java8系列文章 - 带你实战Java8》 — 王爵的技术博客&source=
-    
-
-
-Java8从2014年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。
-没有去处任何API，我们仍然能兼容..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html&title=《跟上Java8 - 函数式编程》 — 王爵的技术博客&source=biezhi,王爵nice,github,blade,tale,java程序员" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://biezhi.me/2017/07/16/keep-up-with-java8.html" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《跟上Java8系列文章 - 带你实战Java8》 — 王爵的技术博客&url=http://biezhi.me/2017/07/16/keep-up-with-java8.html&via=http://biezhi.me" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《跟上Java8 - 函数式编程》 — 王爵的技术博客&url=http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html&via=http://biezhi.me" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://biezhi.me/2017/07/16/keep-up-with-java8.html" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -482,7 +422,7 @@ Java8从2014年出现至今已经三年有余，这里发布的新功能是自Ja
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aS27DMAwFwNz/0u62QGr1kVICWBqtgsSxNV4Q/Oj1itf1tn5/n19z96+7XxcvDAyMxzKu4Xq/JrlPddPJc++uwcDAOIdxt61xYB1f/8+D42eNr8fAwMBIGFewch4GBgbGPCMJmkniOE4TMTAwMHpFbK/11vv1g7U4BgbGAxl51/37nz8y38DAwHgU4yquGWqegJZ3hYGBsTWjWqAmZWd15DlTMGNgYJzMyMcAqwac+bMK3T4MDIyNGL3mfi9xnAnZ41eDgYFxDiNP7/KgmWwuCcfVl46BgbEHo5eizYwze4PS8jELDAyMjRhJgMsbYb3XsbgWx8DAOICRl4tJ0KyG0WqR/MdgAAMDYzvGTJOr12LLj1wU7oyBgXEYozp0nJ8kVpv+5dMiGBgYGzGqA4BqYtc7bBEhMTAwtmZUN5q0zPIG3HgkkHy+rcUxMDC2ZvSGjr1rqo28KEHEwMDYlJEUn9V22MyRr2oaioGBcQJjJvwlaWIv6awOSjEwMM5k5IE1P4RRHWEWhgcYGBgHMFY12nrpYD5sKOShGBgY2zFWHZLIg/ViGAYGxqaMq7h6xWe181coXKtnPTAwMB7I6JWmvWlDdYRZLmIxMDC2ZuQHJnJwnjjOBFwMDIzTGL1m/Uzxufg1YWBgYCwKkb2mXvQvDAwMjA8cwsg3Gh01w8DAOICRpG694UG+9d44EwMD4wRGr3TsHbOYv89U6MfAwHge4weJ5LwqdhONVQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsElEQVR42u3aQW7jQAwEQP//08l5EQju5nAML1A6GYmsUekg0s15veLj5+H4+9/kW/l1nj4vH3h4eHhLt54v/HTNp+vn5+TXfPwuHh4e3jVecrm8DORFJS8A7Tl4eHh438Zrl88b8byJx8PDw/tfeOcNdLLuLJjAw8PD+yQvfxG3YW4e0bZt93LWgoeHhxfz8inS93y+Mt/Dw8PDO56qt0WibdPbMVh9t3h4eHgXePkLN2fMAtw2mCjuEw8PD+8abxY35C/6/Pw2wnhzHTw8PLwLvPONVid/SV79eat9lKng4eHhxbykMCTxRDsS222do/keHh4e3jFvNmr65LaqfBvBcGqHh4eHV/LaafuNAOKkra+3XuHh4eEt8dpGNo9Z89f9LN6NHhkeHh7eKq8NavNhf1JsTh5BsacMDw8Pb5W3kAHHC896/OUwAg8PD++Yl//Un8UWs5jjZMvXP3/Hw8PDu8Br29m24T7fdtDGIq+2auHh4eGNcs7Z0W4ImJWN/DfBm9EXHh4e3ipv90XfDsaSmDivco8pNR4eHt4qL7nF/FZOeHmgHH3Gw8PDu8Ar2tOlqCIpPO1d1VM+PDw8vAu8kya7DVvbx5QHu3h4eHi3ee3Y/iTGTa52MnjDw8PD+yTvZENV2yhvbbqKVsTDw8Nb5c1e1m1Tm4cR7casN3eOh4eHd5mXN9ltHNyWlrYMPK6Ch4eHd423u2Tbas82FkRVAA8PD2+V91MebSiQPL583JUXGDw8PLx7vPPmONk6kBeAhUHX7MDDw8MreXkxmC3ZAvKoN1oFDw8P7xqv3RCQ31weauwWMDw8PLzv4c02ECRXyOOJYgMBHh4e3hfw2nChHfYvb2XAw8PDu8Y7GXq1pNnjngXBeHh4eDd4+Y/8/JyTgtHGFgtBBh4eHl7K+wX3BEEF6I0heAAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
