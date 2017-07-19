@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://biezhi.me/"/>
-  <updated>2017-07-18T15:59:03.000Z</updated>
+  <updated>2017-07-19T01:52:05.000Z</updated>
   <id>http://biezhi.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html"/>
     <id>http://biezhi.me/2017/07/18/keep-up-with-java8-stream.html</id>
     <published>2017-07-17T16:00:00.000Z</published>
-    <updated>2017-07-18T15:59:03.000Z</updated>
+    <updated>2017-07-19T01:52:05.000Z</updated>
     
     <content type="html"><![CDATA[<p>在前面我们简单介绍了<code>lambda</code>表达式，Java8旨在帮助程序员写出更好的代码，
 其对核心类库的改进也是关键的一部分，<code>Stream</code>是Java8种处理集合的抽象概念，
@@ -112,7 +112,7 @@
 <h2 id="max和min"><a href="#max和min" class="headerlink" title="max和min"></a>max和min</h2><p><code>Stream</code>中常用的操作之一是求最大值和最小值，<code>Stream API</code> 中的<code>max</code>和<code>min</code>操作足以解决这一问题。</p>
 <p>我们需要筛选出价格最低的店铺:</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Property property = properties.stream()</div><div class="line">            .max(Comparator.comparingInt(p -&gt; p.priceLevel))</div><div class="line">            .get();</div></pre></td></tr></table></figure>
-<p>查找 Stream 中的最大或最小元素，首先要考虑的是用什么作为排序的指标。
+<p>查找<code>Stream</code>中的最大或最小元素，首先要考虑的是用什么作为排序的指标。
 以查找价格最低的店铺为例，排序的指标就是<strong>店铺的价格等级</strong>。</p>
 <p>为了让<code>Stream</code>对象按照价格等级进行排序，需要传给它一个<code>Comparator</code>对象。
 Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可以方便地实现一个比较器。
@@ -343,9 +343,9 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
     
       <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
     
-      <category term="lambda" scheme="http://biezhi.me/tags/lambda/"/>
-    
       <category term="系列" scheme="http://biezhi.me/tags/%E7%B3%BB%E5%88%97/"/>
+    
+      <category term="lambda" scheme="http://biezhi.me/tags/lambda/"/>
     
       <category term="stream-api" scheme="http://biezhi.me/tags/stream-api/"/>
     
