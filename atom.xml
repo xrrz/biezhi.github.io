@@ -188,22 +188,147 @@
   </entry>
   
   <entry>
+    <title>跟上Java8 - 日期和时间实用技巧</title>
+    <link href="http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html"/>
+    <id>http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html</id>
+    <published>2017-07-19T16:00:00.000Z</published>
+    <updated>2017-07-22T08:02:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>当你开始使用Java操作日期和时间的时候，会有一些棘手。你也许会通过<code>System.currentTimeMillis()</code>
+来返回<code>1970年1月1日</code>到今天的毫秒数。或者使用<code>Date</code>类来操作日期；当遇到加减月份、天数的时候
+你又需要用到<code>Calendar</code>类；当需要格式化日期的时候需要使用<code>java.text.DateFormat</code>类。
+总而言之在Java中操作日期不是很方便，以至于很多开发者不得不使用第三方库，比如: <a href="http://joda-time.sourceforge.net" target="_blank" rel="external">joda-time</a></p>
+<a id="more"></a>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-clock.jpeg" alt="时间" width="600" height="380" title="">
+                </div>
+                <div class="image-caption">时间</div>
+            </figure>
+<h2 id="现有API存在的问题"><a href="#现有API存在的问题" class="headerlink" title="现有API存在的问题"></a>现有API存在的问题</h2><ul>
+<li>线程安全: <code>Date</code>和<code>Calendar</code>不是线程安全的，你需要编写额外的代码处理线程安全问题</li>
+<li>API设计和易用性: 由于<code>Date</code>和<code>Calendar</code>的设计不当你无法完成日常的日期操作</li>
+<li><code>ZonedDate</code>和<code>Time</code>: 你必须编写额外的逻辑处理时区和那些旧的逻辑</li>
+</ul>
+<p>好在<a href="http://jcp.org/en/jsr/detail?id=310" target="_blank" rel="external">JSR 310</a>规范中为Java8添加了新的API，
+在<code>java.time</code>包中，新的API纠正了过去的缺陷，</p>
+<h2 id="新的日期API"><a href="#新的日期API" class="headerlink" title="新的日期API"></a>新的日期API</h2><ul>
+<li><code>ZoneId</code>: 时区ID，用来确定Instant和LocalDateTime互相转换的规则</li>
+<li><code>Instant</code>: 用来表示时间线上的一个点</li>
+<li><code>LocalDate</code>: 表示没有时区的日期, LocalDate是不可变并且线程安全的</li>
+<li><code>LocalTime</code>: 表示没有时区的时间, LocalTime是不可变并且线程安全的</li>
+<li><code>LocalDateTime</code>: 表示没有时区的日期时间, LocalDateTime是不可变并且线程安全的</li>
+<li><code>Clock</code>: 用于访问当前时刻、日期、时间，用到时区</li>
+<li><code>Duration</code>: 用秒和纳秒表示时间的数量</li>
+</ul>
+<p>最常用的就是<code>LocalDate</code>、<code>LocalTime</code>、<code>LocalDateTime</code>了，从它们的名字就可以看出是操作日期
+和时间的。这些类是主要用于当时区不需要显式地指定的上下文。在本章节中我们将讨论最常用的api。</p>
+<h3 id="LocalDate"><a href="#LocalDate" class="headerlink" title="LocalDate"></a>LocalDate</h3><p><code>LocalDate</code>代表一个IOS格式(yyyy-MM-dd)的日期，可以存储 <code>生日</code>、<code>纪念日</code>等日期。
+获取当前的日期：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate localDate = LocalDate.now();</div><div class="line">System.out.println(<span class="string">"localDate: "</span> + localDate);</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">localDate: 2017-07-20</div></pre></td></tr></table></figure>
+<p><code>LocalDate</code>可以指定特定的日期，调用<code>of</code>或<code>parse</code>方法返回该实例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate.of(<span class="number">2017</span>, <span class="number">07</span>, <span class="number">20</span>);</div><div class="line"></div><div class="line">LocalDate.parse(<span class="string">"2017-07-20"</span>);</div></pre></td></tr></table></figure>
+<p>当然它还有一些其他方法，我们一起来看看：</p>
+<p><strong>为今天添加一天，也就是获取明天</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate tomorrow = LocalDate.now().plusDays(<span class="number">1</span>);</div></pre></td></tr></table></figure>
+<p><strong>从今天减去一个月</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate prevMonth = LocalDate.now().minus(<span class="number">1</span>, ChronoUnit.MONTHS);</div></pre></td></tr></table></figure>
+<p>下面写两个例子，分别解析日期 <code>2017-07-20</code>，获取每周中的<code>星期</code>和每月中的<code>日</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">DayOfWeek thursday = LocalDate.parse(<span class="string">"2017-07-20"</span>).getDayOfWeek();</div><div class="line">System.out.println(<span class="string">"周四: "</span> + thursday);</div><div class="line"></div><div class="line"><span class="keyword">int</span> twenty = LocalDate.parse(<span class="string">"2017-07-20"</span>).getDayOfMonth();</div><div class="line">System.out.println(<span class="string">"twenty: "</span> + twenty);</div></pre></td></tr></table></figure>
+<p>试试今年是不是闰年:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">boolean</span> leapYear = LocalDate.now().isLeapYear();</div><div class="line">System.out.println(<span class="string">"是否闰年: "</span> + leapYear);</div></pre></td></tr></table></figure>
+<p>判断是否在日期之前或之后:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">boolean</span> notBefore = LocalDate.parse(<span class="string">"2017-07-20"</span>)</div><div class="line">                .isBefore(LocalDate.parse(<span class="string">"2017-07-22"</span>));</div><div class="line">System.out.println(<span class="string">"notBefore: "</span> + notBefore);</div><div class="line"></div><div class="line"><span class="keyword">boolean</span> isAfter = LocalDate.parse(<span class="string">"2017-07-20"</span>).isAfter(LocalDate.parse(<span class="string">"2017-07-22"</span>));</div><div class="line">System.out.println(<span class="string">"isAfter: "</span> + isAfter);</div></pre></td></tr></table></figure>
+<p>获取这个月的第一天:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate firstDayOfMonth = LocalDate.parse(<span class="string">"2017-07-20"</span>)</div><div class="line">                .with(TemporalAdjusters.firstDayOfMonth());</div><div class="line">System.out.println(<span class="string">"这个月的第一天: "</span> + firstDayOfMonth);</div><div class="line"></div><div class="line">firstDayOfMonth = firstDayOfMonth.withDayOfMonth(<span class="number">1</span>);</div><div class="line">System.out.println(<span class="string">"这个月的第一天: "</span> + firstDayOfMonth);</div></pre></td></tr></table></figure>
+<p>判断今天是否是我的生日，例如我的生日是 <code>2009-07-20</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate birthday = LocalDate.of(<span class="number">2009</span>, <span class="number">07</span>, <span class="number">20</span>);</div><div class="line">MonthDay birthdayMd = MonthDay.of(birthday.getMonth(), birthday.getDayOfMonth());</div><div class="line">MonthDay today = MonthDay.from(LocalDate.now());</div><div class="line">System.out.println(<span class="string">"今天是否是我的生日: "</span> + today.equals(birthdayMd));</div></pre></td></tr></table></figure>
+<h3 id="LocalTime"><a href="#LocalTime" class="headerlink" title="LocalTime"></a>LocalTime</h3><p><code>LocalTime</code>表示一个时间，而不是日期，下面介绍一下它的使用方法。</p>
+<p>获取现在的时间，输出<code>15:01:22.144</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalTime now = LocalTime.now();</div><div class="line">System.out.println(<span class="string">"现在的时间: "</span> + now);</div></pre></td></tr></table></figure>
+<p>将一个字符串时间解析为<code>LocalTime</code>，输出<code>15:02</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalTime nowTime = LocalTime.parse(<span class="string">"15:02"</span>);</div><div class="line">System.out.println(<span class="string">"时间是: "</span> + nowTime);</div></pre></td></tr></table></figure>
+<p>使用静态方法<code>of</code>创建一个时间</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalTime nowTime = LocalTime.of(<span class="number">15</span>, <span class="number">02</span>);</div><div class="line">System.out.println(<span class="string">"时间是: "</span> + nowTime);</div></pre></td></tr></table></figure>
+<p>使用解析字符串的方式并添加一小时，输出<code>16:02</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalTime nextHour = LocalTime.parse(<span class="string">"15:02"</span>).plus(<span class="number">1</span>, ChronoUnit.HOURS);</div><div class="line">System.out.println(<span class="string">"下一个小时: "</span> + nextHour);</div></pre></td></tr></table></figure>
+<p>获取时间的<code>小时</code>、<code>分钟</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> hour = LocalTime.parse(<span class="string">"15:02"</span>).getHour();</div><div class="line">System.out.println(<span class="string">"小时: "</span> + hour);</div><div class="line"><span class="keyword">int</span> minute = LocalTime.parse(<span class="string">"15:02"</span>).getMinute();</div><div class="line">System.out.println(<span class="string">"分钟: "</span> + minute);</div></pre></td></tr></table></figure>
+<p>我们也可以通过之前类似的API检查一个时间是否在另一个时间之前、之后</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">boolean</span> isBefore = LocalTime.parse(<span class="string">"15:02"</span>).isBefore(LocalTime.parse(<span class="string">"16:02"</span>));</div><div class="line"><span class="keyword">boolean</span> isAfter = LocalTime.parse(<span class="string">"15:02"</span>).isAfter(LocalTime.parse(<span class="string">"16:02"</span>));</div><div class="line">System.out.println(<span class="string">"isBefore: "</span> + isBefore);</div><div class="line">System.out.println(<span class="string">"isAfter: "</span> + isAfter);</div></pre></td></tr></table></figure>
+<p>输出 <code>isBefore: true</code>, <code>isAfter: false</code>。</p>
+<p>在<code>LocalTime</code>类中也将每天的开始和结束作为常量供我们使用:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">System.out.println(LocalTime.MAX);</div><div class="line">System.out.println(LocalTime.MIN);</div></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="number">23</span>:<span class="number">59</span>:<span class="number">59.999999999</span></div><div class="line"><span class="number">00</span>:<span class="number">00</span></div></pre></td></tr></table></figure>
+<p><code>LocalTime</code>就这些了，下面我们来了解一下<code>LocalDateTime</code></p>
+<h3 id="LocalDateTime"><a href="#LocalDateTime" class="headerlink" title="LocalDateTime"></a>LocalDateTime</h3><p><code>LocalDateTime</code>是用来表示日期和时间的，这是一个最常用的类之一。</p>
+<p>获取当前的日期和时间:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDateTime now = LocalDateTime.now();</div><div class="line">System.out.println(<span class="string">"现在: "</span> + now);</div></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">现在: 2017-07-20T15:17:19.926</div></pre></td></tr></table></figure>
+<p>下面使用静态方法和字符串的方式分别创建<code>LocalDateTime</code>对象</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDateTime.of(<span class="number">2017</span>, Month.JULY, <span class="number">20</span>, <span class="number">15</span>, <span class="number">18</span>);</div><div class="line"></div><div class="line">LocalDateTime.parse(<span class="string">"2017-07-20T15:18:00"</span>);</div><div class="line">``</div><div class="line"></div><div class="line">同时`LocalDateTime`也提供了相关API来对日期和时间进行增减操作:</div><div class="line"></div><div class="line">```java</div><div class="line">LocalDateTime tomorrow = now.plusDays(<span class="number">1</span>);</div><div class="line">System.out.println(<span class="string">"明天的这个时间: "</span> + tomorrow);</div><div class="line"></div><div class="line">LocalDateTime minusTowHour = now.minusHours(<span class="number">2</span>);</div><div class="line">System.out.println(<span class="string">"两小时前: "</span> + minusTowHour);</div></pre></td></tr></table></figure>
+<p>这个类也提供一系列的<code>get</code>方法来获取特定单位:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Month month = now.getMonth();</div><div class="line">System.out.println(<span class="string">"当前月份: "</span> + month);</div></pre></td></tr></table></figure>
+<h2 id="日期格式化"><a href="#日期格式化" class="headerlink" title="日期格式化"></a>日期格式化</h2><p>在日常开发中我们用到最多的也许就是日期、时间的格式化了，那在Java8种该如何操作呢？</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDateTime now = LocalDateTime.now();</div><div class="line">DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</div><div class="line"></div><div class="line">System.out.println(<span class="string">"默认格式化: "</span> + now);</div><div class="line">System.out.println(<span class="string">"自定义格式化: "</span> + now.format(dateTimeFormatter));</div><div class="line"></div><div class="line">LocalDateTime localDateTime = LocalDateTime.parse(<span class="string">"2017-07-20 15:27:44"</span>, dateTimeFormatter);</div><div class="line">System.out.println(<span class="string">"字符串转LocalDateTime: "</span> + localDateTime);</div></pre></td></tr></table></figure>
+<p>也可以使用<code>DateTimeFormatter</code>的<code>format</code>方法将日期、时间格式化为字符串</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(<span class="string">"yyyy-MM-dd"</span>);</div><div class="line">String dateString = dateTimeFormatter.format(LocalDate.now());</div><div class="line">System.out.println(<span class="string">"日期转字符串: "</span> + dateString);</div></pre></td></tr></table></figure>
+<h2 id="日期周期"><a href="#日期周期" class="headerlink" title="日期周期"></a>日期周期</h2><p><code>Period</code>类用于修改给定日期或获得的两个日期之间的区别。</p>
+<p>给初始化的日期添加5天:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate initialDate = LocalDate.parse(<span class="string">"2017-07-20"</span>);</div><div class="line">LocalDate finalDate   = initialDate.plus(Period.ofDays(<span class="number">5</span>));</div><div class="line">System.out.println(<span class="string">"初始化日期: "</span> + initialDate);</div><div class="line">System.out.println(<span class="string">"加日期之后: "</span> + finalDate);</div></pre></td></tr></table></figure>
+<p>周期API中提供给我们可以比较两个日期的差别，像下面这样获取差距天数:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">long</span> between = ChronoUnit.DAYS.between(initialDate, finalDate);</div><div class="line">System.out.println(<span class="string">"差距天数: "</span> + between);</div></pre></td></tr></table></figure>
+<p>上面的代码会返回5，当然你想获取两个日期相差多少小时也是简单的。</p>
+<h2 id="与遗留代码转换"><a href="#与遗留代码转换" class="headerlink" title="与遗留代码转换"></a>与遗留代码转换</h2><p>在之前的代码中你可能出现了大量的<code>Date</code>类，如何将它转换为Java8种的时间类呢？</p>
+<p><code>Date</code>和<code>Instant</code>互相转换</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Date date = Date.from(Instant.now());</div><div class="line">Instant instant = date.toInstant();</div></pre></td></tr></table></figure>
+<p><code>Date</code>转换为<code>LocalDateTime</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDateTime localDateTime = LocalDateTime.from(<span class="keyword">new</span> Date());</div><div class="line">System.out.println(localDateTime);</div></pre></td></tr></table></figure>
+<p><code>LocalDateTime</code>转<code>Date</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Date date =</div><div class="line">    Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());</div></pre></td></tr></table></figure>
+<p><code>LocalDate</code>转<code>Date</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Date date =</div><div class="line">    Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当你开始使用Java操作日期和时间的时候，会有一些棘手。你也许会通过&lt;code&gt;System.currentTimeMillis()&lt;/code&gt;
+来返回&lt;code&gt;1970年1月1日&lt;/code&gt;到今天的毫秒数。或者使用&lt;code&gt;Date&lt;/code&gt;类来操作日期；当遇到加减月份、天数的时候
+你又需要用到&lt;code&gt;Calendar&lt;/code&gt;类；当需要格式化日期的时候需要使用&lt;code&gt;java.text.DateFormat&lt;/code&gt;类。
+总而言之在Java中操作日期不是很方便，以至于很多开发者不得不使用第三方库，比如: &lt;a href=&quot;http://joda-time.sourceforge.net&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;joda-time&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="跟上Java8" scheme="http://biezhi.me/categories/%E8%B7%9F%E4%B8%8AJava8/"/>
+    
+    
+      <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
+    
+      <category term="datetime" scheme="http://biezhi.me/tags/datetime/"/>
+    
+  </entry>
+  
+  <entry>
     <title>跟上Java8 - 函数式编程</title>
     <link href="http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html"/>
     <id>http://biezhi.me/2017/07/19/keep-up-with-java8-functional-programming.html</id>
     <published>2017-07-18T16:00:00.000Z</published>
-    <updated>2017-07-19T16:57:44.000Z</updated>
+    <updated>2017-07-21T15:22:31.000Z</updated>
     
-    <content type="html"><![CDATA[<figure class="image-bubble">
+    <content type="html"><![CDATA[<p>在前面的章节我们快速学习了<code>lambda</code>和<code>Stream</code>，本章节中我们来回顾和理解函数式编程的思想。
+我们不断的提及<code>函数式</code>这个名词，它指的是lambda吗？如果是这样，采用函数式编程能为你带来什么好处呢?</p>
+<a id="more"></a>
+<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/static/img/article/java8-function-programing.jpg" alt="函数式编程" width="600" height="400" title="">
                 </div>
                 <div class="image-caption">函数式编程</div>
             </figure>
-<p>在前面的章节我们快速学习了<code>lambda</code>和<code>Stream</code>，本章节中我们来回顾和理解函数式编程的思想。
-我们不断的提及<code>函数式</code>这个名词，它指的是lambda吗？如果是这样，采用函数式编程能为你带来什么好处呢?</p>
-<a id="more"></a>
 <h2 id="函数式的思考"><a href="#函数式的思考" class="headerlink" title="函数式的思考"></a>函数式的思考</h2><h3 id="命令式编程"><a href="#命令式编程" class="headerlink" title="命令式编程"></a>命令式编程</h3><p>一般我们实现一个系统有两种思考方式，一种专注于如何实现，比如下厨做菜，通常按照自己熟悉的烹饪方法：首先洗菜，
 然后切菜，热油，下菜，然后…… 这看起来像是一系列的命令合集。对于这种”如何做”式的编程风格我们称之为<strong>命令式编程</strong>，
 它的特点非常像工厂的流水线、计算机的指令处理，都是串行化、命令式的。</p>
@@ -242,14 +367,7 @@
     
     <summary type="html">
     
-      &lt;figure class=&quot;image-bubble&quot;&gt;
-                &lt;div class=&quot;img-lightbox&quot;&gt;
-                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
-                    &lt;img src=&quot;/static/img/article/java8-function-programing.jpg&quot; alt=&quot;函数式编程&quot; width=&quot;600&quot; height=&quot;400&quot; title=&quot;&quot;&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;image-caption&quot;&gt;函数式编程&lt;/div&gt;
-            &lt;/figure&gt;
-&lt;p&gt;在前面的章节我们快速学习了&lt;code&gt;lambda&lt;/code&gt;和&lt;code&gt;Stream&lt;/code&gt;，本章节中我们来回顾和理解函数式编程的思想。
+      &lt;p&gt;在前面的章节我们快速学习了&lt;code&gt;lambda&lt;/code&gt;和&lt;code&gt;Stream&lt;/code&gt;，本章节中我们来回顾和理解函数式编程的思想。
 我们不断的提及&lt;code&gt;函数式&lt;/code&gt;这个名词，它指的是lambda吗？如果是这样，采用函数式编程能为你带来什么好处呢?&lt;/p&gt;
     
     </summary>
@@ -450,20 +568,20 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
     <link href="http://biezhi.me/2017/07/17/keep-up-with-java8-lambda.html"/>
     <id>http://biezhi.me/2017/07/17/keep-up-with-java8-lambda.html</id>
     <published>2017-07-16T16:00:00.000Z</published>
-    <updated>2017-07-19T11:38:38.000Z</updated>
+    <updated>2017-07-21T15:22:31.000Z</updated>
     
-    <content type="html"><![CDATA[<figure class="image-bubble">
+    <content type="html"><![CDATA[<p>从<code>java8</code>出现以来<code>lambda</code>是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。
+很长一段时间<code>java</code>被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编程的流行<code>java8</code>种也引入了
+这种编程风格。在此之前我们都在写匿名内部类干这些事，但有时候这不是好的做法，本文中将介绍和使用<code>lambda</code>，
+带你体验函数式编程的魔力。</p>
+<a id="more"></a>
+<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/static/img/article/lambda-expression.png" alt="lambda表达式" width="500" height="180" title="">
                 </div>
                 <div class="image-caption">lambda表达式</div>
             </figure>
-<p>从<code>java8</code>出现以来<code>lambda</code>是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。
-很长一段时间<code>java</code>被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编程的流行<code>java8</code>种也引入了
-这种编程风格。在此之前我们都在写匿名内部类干这些事，但有时候这不是好的做法，本文中将介绍和使用<code>lambda</code>，
-带你体验函数式编程的魔力。</p>
-<a id="more"></a>
 <h2 id="什么是lambda"><a href="#什么是lambda" class="headerlink" title="什么是lambda?"></a>什么是lambda?</h2><p>lambda表达式是一段可以传递的代码，它的核心思想是将面向对象中的传递数据变成传递行为。
 我们回顾一下在使用java8之前要做的事，之前我们编写一个线程时是这样的：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Runnable r = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"do something."</span>);      </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -580,14 +698,7 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
     
     <summary type="html">
     
-      &lt;figure class=&quot;image-bubble&quot;&gt;
-                &lt;div class=&quot;img-lightbox&quot;&gt;
-                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
-                    &lt;img src=&quot;/static/img/article/lambda-expression.png&quot; alt=&quot;lambda表达式&quot; width=&quot;500&quot; height=&quot;180&quot; title=&quot;&quot;&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;image-caption&quot;&gt;lambda表达式&lt;/div&gt;
-            &lt;/figure&gt;
-&lt;p&gt;从&lt;code&gt;java8&lt;/code&gt;出现以来&lt;code&gt;lambda&lt;/code&gt;是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。
+      &lt;p&gt;从&lt;code&gt;java8&lt;/code&gt;出现以来&lt;code&gt;lambda&lt;/code&gt;是最重要的特性之一，它可以让我们用简洁流畅的代码完成一个功能。
 很长一段时间&lt;code&gt;java&lt;/code&gt;被吐槽是冗余和缺乏函数式编程能力的语言，随着函数式编程的流行&lt;code&gt;java8&lt;/code&gt;种也引入了
 这种编程风格。在此之前我们都在写匿名内部类干这些事，但有时候这不是好的做法，本文中将介绍和使用&lt;code&gt;lambda&lt;/code&gt;，
 带你体验函数式编程的魔力。&lt;/p&gt;
@@ -610,19 +721,19 @@ Java8提供了一个新的静态方法<code>comparingInt</code>，使用它可�
     <link href="http://biezhi.me/2017/07/16/keep-up-with-java8.html"/>
     <id>http://biezhi.me/2017/07/16/keep-up-with-java8.html</id>
     <published>2017-07-15T16:00:00.000Z</published>
-    <updated>2017-07-19T17:02:03.000Z</updated>
+    <updated>2017-07-22T07:02:44.000Z</updated>
     
-    <content type="html"><![CDATA[<figure class="image-bubble">
+    <content type="html"><![CDATA[<p><code>Java8</code>从<code>2014</code>年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。
+没有去处任何API，我们仍然能兼容以前的代码，新功能中提供了更多的语法和设计，帮助开发者编写更清楚、简洁的代码。
+Java8把函数式编程里一些最好的思想融入到大家熟知的Java语法中，让你用更少的时间写出高效代码。</p>
+<a id="more"></a>
+<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/static/img/article/java8-banner.png" alt="开启Java8之路" width="500" height="300" title="">
                 </div>
                 <div class="image-caption">开启Java8之路</div>
             </figure>
-<p><code>Java8</code>从<code>2014</code>年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。
-没有去处任何API，我们仍然能兼容以前的代码，新功能中提供了更多的语法和设计，帮助开发者编写更清楚、简洁的代码。
-Java8把函数式编程里一些最好的思想融入到大家熟知的Java语法中，让你用更少的时间写出高效代码。</p>
-<a id="more"></a>
 <p>而目前国内很多开发者的现状还处于<code>Java6</code>的语法之上，这确实没什么问题，可以保证你的企业软件稳定运行下去。
 但时代总是变化的，我们熟悉的Spring框架也对java8做了更好的支持。
 大势所趋，为何不跟上<code>Java8</code>的节奏一起体验现代高级编程语言中的新特性呢？
@@ -640,7 +751,7 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
 <li><a href="/2017/07/17/keep-up-with-java8-lambda.html">跟上Java8 - 了解lambda</a></li>
 <li><a href="/2017/07/18/keep-up-with-java8-stream.html">跟上Java8 - Stream API快速入门</a></li>
 <li><a href="/2017/07/19/keep-up-with-java8-functional-programming.html">跟上Java8 - 函数式编程</a></li>
-<li><a href="/2017/07/20/keep-up-with-java8-datetime.html">跟上Java8 - 日期和时间最实用技巧</a></li>
+<li><a href="/2017/07/20/keep-up-with-java8-datetime.html">跟上Java8 - 日期和时间实用技巧</a></li>
 <li><a href="/2017/07/21/keep-up-with-java8-features.html">跟上Java8 - 你忽略了的新特性</a></li>
 <li><a href="/2017/07/22/keep-up-with-java8-concurrent.html">跟上Java8 - 使用lambda并发编程</a></li>
 <li><a href="/2017/07/23/keep-up-with-java8-tips.html">跟上Java8 - 七七八八的黑科技</a></li>
@@ -656,14 +767,7 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
     
     <summary type="html">
     
-      &lt;figure class=&quot;image-bubble&quot;&gt;
-                &lt;div class=&quot;img-lightbox&quot;&gt;
-                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
-                    &lt;img src=&quot;/static/img/article/java8-banner.png&quot; alt=&quot;开启Java8之路&quot; width=&quot;500&quot; height=&quot;300&quot; title=&quot;&quot;&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;image-caption&quot;&gt;开启Java8之路&lt;/div&gt;
-            &lt;/figure&gt;
-&lt;p&gt;&lt;code&gt;Java8&lt;/code&gt;从&lt;code&gt;2014&lt;/code&gt;年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。
+      &lt;p&gt;&lt;code&gt;Java8&lt;/code&gt;从&lt;code&gt;2014&lt;/code&gt;年出现至今已经三年有余，这里发布的新功能是自Java1.0发布18年来最大变化的。
 没有去处任何API，我们仍然能兼容以前的代码，新功能中提供了更多的语法和设计，帮助开发者编写更清楚、简洁的代码。
 Java8把函数式编程里一些最好的思想融入到大家熟知的Java语法中，让你用更少的时间写出高效代码。&lt;/p&gt;
     

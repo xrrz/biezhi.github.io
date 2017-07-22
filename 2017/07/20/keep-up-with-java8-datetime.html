@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>跟上Java8 - 日期和时间实用技巧 | 王爵的技术博客 | 一个后端程序员的笔记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java8,datetime">
+    <meta name="description" content="当你开始使用Java操作日期和时间的时候，会有一些棘手。你也许会通过System.currentTimeMillis() 来返回1970年1月1日到今天的毫秒数。或者使用Date类来操作日期；当遇到加减月份、天数的时候 你又需要用到Calendar类；当需要格式化日期的时候需要使用java.text.DateFormat类。 总而言之在Java中操作日期不是很方便，以至于很多开发者不得不使用第三方">
+<meta name="keywords" content="Java8,datetime">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跟上Java8 - 日期和时间实用技巧">
+<meta property="og:url" content="http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html">
+<meta property="og:site_name" content="王爵的技术博客">
+<meta property="og:description" content="当你开始使用Java操作日期和时间的时候，会有一些棘手。你也许会通过System.currentTimeMillis() 来返回1970年1月1日到今天的毫秒数。或者使用Date类来操作日期；当遇到加减月份、天数的时候 你又需要用到Calendar类；当需要格式化日期的时候需要使用java.text.DateFormat类。 总而言之在Java中操作日期不是很方便，以至于很多开发者不得不使用第三方">
+<meta property="og:image" content="http://biezhi.me/static/img/article/java8-clock.jpeg">
+<meta property="og:updated_time" content="2017-07-22T08:02:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跟上Java8 - 日期和时间实用技巧">
+<meta name="twitter:description" content="当你开始使用Java操作日期和时间的时候，会有一些棘手。你也许会通过System.currentTimeMillis() 来返回1970年1月1日到今天的毫秒数。或者使用Date类来操作日期；当遇到加减月份、天数的时候 你又需要用到Calendar类；当需要格式化日期的时候需要使用java.text.DateFormat类。 总而言之在Java中操作日期不是很方便，以至于很多开发者不得不使用第三方">
+<meta name="twitter:image" content="http://biezhi.me/static/img/article/java8-clock.jpeg">
+    
+        <link rel="alternate" type="application/atom+xml" title="王爵的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.10">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">王爵nice</h5>
+          <a href="mailto:biezhi.me@gmail.com" title="biezhi.me@gmail.com" class="mail">biezhi.me@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-cubes"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/design"  >
+                <i class="icon icon-lg icon-dribbble"></i>
+                设计
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-leaf"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/biezhi" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">跟上Java8 - 日期和时间实用技巧</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">跟上Java8 - 日期和时间实用技巧</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-07-19T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-07-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/跟上Java8/">跟上Java8</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#现有API存在的问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">现有API存在的问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新的日期API"><span class="post-toc-number">2.</span> <span class="post-toc-text">新的日期API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LocalDate"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">LocalDate</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LocalTime"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">LocalTime</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LocalDateTime"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">LocalDateTime</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#日期格式化"><span class="post-toc-number">3.</span> <span class="post-toc-text">日期格式化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#日期周期"><span class="post-toc-number">4.</span> <span class="post-toc-text">日期周期</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#与遗留代码转换"><span class="post-toc-number">5.</span> <span class="post-toc-text">与遗留代码转换</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-keep-up-with-java8-datetime"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">跟上Java8 - 日期和时间实用技巧</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-07-20 00:00:00" datetime="2017-07-19T16:00:00.000Z"  itemprop="datePublished">2017-07-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/跟上Java8/">跟上Java8</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>当你开始使用Java操作日期和时间的时候，会有一些棘手。你也许会通过<code>System.currentTimeMillis()</code>
+来返回<code>1970年1月1日</code>到今天的毫秒数。或者使用<code>Date</code>类来操作日期；当遇到加减月份、天数的时候
+你又需要用到<code>Calendar</code>类；当需要格式化日期的时候需要使用<code>java.text.DateFormat</code>类。
+总而言之在Java中操作日期不是很方便，以至于很多开发者不得不使用第三方库，比如: <a href="http://joda-time.sourceforge.net" target="_blank" rel="external">joda-time</a></p>
+<a id="more"></a>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-clock.jpeg" alt="时间" width="600" height="380" title="">
+                </div>
+                <div class="image-caption">时间</div>
+            </figure>
+<h2 id="现有API存在的问题"><a href="#现有API存在的问题" class="headerlink" title="现有API存在的问题"></a>现有API存在的问题</h2><ul>
+<li>线程安全: <code>Date</code>和<code>Calendar</code>不是线程安全的，你需要编写额外的代码处理线程安全问题</li>
+<li>API设计和易用性: 由于<code>Date</code>和<code>Calendar</code>的设计不当你无法完成日常的日期操作</li>
+<li><code>ZonedDate</code>和<code>Time</code>: 你必须编写额外的逻辑处理时区和那些旧的逻辑</li>
+</ul>
+<p>好在<a href="http://jcp.org/en/jsr/detail?id=310" target="_blank" rel="external">JSR 310</a>规范中为Java8添加了新的API，
+在<code>java.time</code>包中，新的API纠正了过去的缺陷，</p>
+<h2 id="新的日期API"><a href="#新的日期API" class="headerlink" title="新的日期API"></a>新的日期API</h2><ul>
+<li><code>ZoneId</code>: 时区ID，用来确定Instant和LocalDateTime互相转换的规则</li>
+<li><code>Instant</code>: 用来表示时间线上的一个点</li>
+<li><code>LocalDate</code>: 表示没有时区的日期, LocalDate是不可变并且线程安全的</li>
+<li><code>LocalTime</code>: 表示没有时区的时间, LocalTime是不可变并且线程安全的</li>
+<li><code>LocalDateTime</code>: 表示没有时区的日期时间, LocalDateTime是不可变并且线程安全的</li>
+<li><code>Clock</code>: 用于访问当前时刻、日期、时间，用到时区</li>
+<li><code>Duration</code>: 用秒和纳秒表示时间的数量</li>
+</ul>
+<p>最常用的就是<code>LocalDate</code>、<code>LocalTime</code>、<code>LocalDateTime</code>了，从它们的名字就可以看出是操作日期
+和时间的。这些类是主要用于当时区不需要显式地指定的上下文。在本章节中我们将讨论最常用的api。</p>
+<h3 id="LocalDate"><a href="#LocalDate" class="headerlink" title="LocalDate"></a>LocalDate</h3><p><code>LocalDate</code>代表一个IOS格式(yyyy-MM-dd)的日期，可以存储 <code>生日</code>、<code>纪念日</code>等日期。
+获取当前的日期：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate localDate = LocalDate.now();</div><div class="line">System.out.println(<span class="string">"localDate: "</span> + localDate);</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">localDate: 2017-07-20</div></pre></td></tr></table></figure>
+<p><code>LocalDate</code>可以指定特定的日期，调用<code>of</code>或<code>parse</code>方法返回该实例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate.of(<span class="number">2017</span>, <span class="number">07</span>, <span class="number">20</span>);</div><div class="line"></div><div class="line">LocalDate.parse(<span class="string">"2017-07-20"</span>);</div></pre></td></tr></table></figure>
+<p>当然它还有一些其他方法，我们一起来看看：</p>
+<p><strong>为今天添加一天，也就是获取明天</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate tomorrow = LocalDate.now().plusDays(<span class="number">1</span>);</div></pre></td></tr></table></figure>
+<p><strong>从今天减去一个月</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate prevMonth = LocalDate.now().minus(<span class="number">1</span>, ChronoUnit.MONTHS);</div></pre></td></tr></table></figure>
+<p>下面写两个例子，分别解析日期 <code>2017-07-20</code>，获取每周中的<code>星期</code>和每月中的<code>日</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">DayOfWeek thursday = LocalDate.parse(<span class="string">"2017-07-20"</span>).getDayOfWeek();</div><div class="line">System.out.println(<span class="string">"周四: "</span> + thursday);</div><div class="line"></div><div class="line"><span class="keyword">int</span> twenty = LocalDate.parse(<span class="string">"2017-07-20"</span>).getDayOfMonth();</div><div class="line">System.out.println(<span class="string">"twenty: "</span> + twenty);</div></pre></td></tr></table></figure>
+<p>试试今年是不是闰年:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">boolean</span> leapYear = LocalDate.now().isLeapYear();</div><div class="line">System.out.println(<span class="string">"是否闰年: "</span> + leapYear);</div></pre></td></tr></table></figure>
+<p>判断是否在日期之前或之后:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">boolean</span> notBefore = LocalDate.parse(<span class="string">"2017-07-20"</span>)</div><div class="line">                .isBefore(LocalDate.parse(<span class="string">"2017-07-22"</span>));</div><div class="line">System.out.println(<span class="string">"notBefore: "</span> + notBefore);</div><div class="line"></div><div class="line"><span class="keyword">boolean</span> isAfter = LocalDate.parse(<span class="string">"2017-07-20"</span>).isAfter(LocalDate.parse(<span class="string">"2017-07-22"</span>));</div><div class="line">System.out.println(<span class="string">"isAfter: "</span> + isAfter);</div></pre></td></tr></table></figure>
+<p>获取这个月的第一天:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate firstDayOfMonth = LocalDate.parse(<span class="string">"2017-07-20"</span>)</div><div class="line">                .with(TemporalAdjusters.firstDayOfMonth());</div><div class="line">System.out.println(<span class="string">"这个月的第一天: "</span> + firstDayOfMonth);</div><div class="line"></div><div class="line">firstDayOfMonth = firstDayOfMonth.withDayOfMonth(<span class="number">1</span>);</div><div class="line">System.out.println(<span class="string">"这个月的第一天: "</span> + firstDayOfMonth);</div></pre></td></tr></table></figure>
+<p>判断今天是否是我的生日，例如我的生日是 <code>2009-07-20</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate birthday = LocalDate.of(<span class="number">2009</span>, <span class="number">07</span>, <span class="number">20</span>);</div><div class="line">MonthDay birthdayMd = MonthDay.of(birthday.getMonth(), birthday.getDayOfMonth());</div><div class="line">MonthDay today = MonthDay.from(LocalDate.now());</div><div class="line">System.out.println(<span class="string">"今天是否是我的生日: "</span> + today.equals(birthdayMd));</div></pre></td></tr></table></figure>
+<h3 id="LocalTime"><a href="#LocalTime" class="headerlink" title="LocalTime"></a>LocalTime</h3><p><code>LocalTime</code>表示一个时间，而不是日期，下面介绍一下它的使用方法。</p>
+<p>获取现在的时间，输出<code>15:01:22.144</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalTime now = LocalTime.now();</div><div class="line">System.out.println(<span class="string">"现在的时间: "</span> + now);</div></pre></td></tr></table></figure>
+<p>将一个字符串时间解析为<code>LocalTime</code>，输出<code>15:02</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalTime nowTime = LocalTime.parse(<span class="string">"15:02"</span>);</div><div class="line">System.out.println(<span class="string">"时间是: "</span> + nowTime);</div></pre></td></tr></table></figure>
+<p>使用静态方法<code>of</code>创建一个时间</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalTime nowTime = LocalTime.of(<span class="number">15</span>, <span class="number">02</span>);</div><div class="line">System.out.println(<span class="string">"时间是: "</span> + nowTime);</div></pre></td></tr></table></figure>
+<p>使用解析字符串的方式并添加一小时，输出<code>16:02</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalTime nextHour = LocalTime.parse(<span class="string">"15:02"</span>).plus(<span class="number">1</span>, ChronoUnit.HOURS);</div><div class="line">System.out.println(<span class="string">"下一个小时: "</span> + nextHour);</div></pre></td></tr></table></figure>
+<p>获取时间的<code>小时</code>、<code>分钟</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> hour = LocalTime.parse(<span class="string">"15:02"</span>).getHour();</div><div class="line">System.out.println(<span class="string">"小时: "</span> + hour);</div><div class="line"><span class="keyword">int</span> minute = LocalTime.parse(<span class="string">"15:02"</span>).getMinute();</div><div class="line">System.out.println(<span class="string">"分钟: "</span> + minute);</div></pre></td></tr></table></figure>
+<p>我们也可以通过之前类似的API检查一个时间是否在另一个时间之前、之后</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">boolean</span> isBefore = LocalTime.parse(<span class="string">"15:02"</span>).isBefore(LocalTime.parse(<span class="string">"16:02"</span>));</div><div class="line"><span class="keyword">boolean</span> isAfter = LocalTime.parse(<span class="string">"15:02"</span>).isAfter(LocalTime.parse(<span class="string">"16:02"</span>));</div><div class="line">System.out.println(<span class="string">"isBefore: "</span> + isBefore);</div><div class="line">System.out.println(<span class="string">"isAfter: "</span> + isAfter);</div></pre></td></tr></table></figure>
+<p>输出 <code>isBefore: true</code>, <code>isAfter: false</code>。</p>
+<p>在<code>LocalTime</code>类中也将每天的开始和结束作为常量供我们使用:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">System.out.println(LocalTime.MAX);</div><div class="line">System.out.println(LocalTime.MIN);</div></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="number">23</span>:<span class="number">59</span>:<span class="number">59.999999999</span></div><div class="line"><span class="number">00</span>:<span class="number">00</span></div></pre></td></tr></table></figure>
+<p><code>LocalTime</code>就这些了，下面我们来了解一下<code>LocalDateTime</code></p>
+<h3 id="LocalDateTime"><a href="#LocalDateTime" class="headerlink" title="LocalDateTime"></a>LocalDateTime</h3><p><code>LocalDateTime</code>是用来表示日期和时间的，这是一个最常用的类之一。</p>
+<p>获取当前的日期和时间:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDateTime now = LocalDateTime.now();</div><div class="line">System.out.println(<span class="string">"现在: "</span> + now);</div></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">现在: 2017-07-20T15:17:19.926</div></pre></td></tr></table></figure>
+<p>下面使用静态方法和字符串的方式分别创建<code>LocalDateTime</code>对象</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDateTime.of(<span class="number">2017</span>, Month.JULY, <span class="number">20</span>, <span class="number">15</span>, <span class="number">18</span>);</div><div class="line"></div><div class="line">LocalDateTime.parse(<span class="string">"2017-07-20T15:18:00"</span>);</div><div class="line">``</div><div class="line"></div><div class="line">同时`LocalDateTime`也提供了相关API来对日期和时间进行增减操作:</div><div class="line"></div><div class="line">```java</div><div class="line">LocalDateTime tomorrow = now.plusDays(<span class="number">1</span>);</div><div class="line">System.out.println(<span class="string">"明天的这个时间: "</span> + tomorrow);</div><div class="line"></div><div class="line">LocalDateTime minusTowHour = now.minusHours(<span class="number">2</span>);</div><div class="line">System.out.println(<span class="string">"两小时前: "</span> + minusTowHour);</div></pre></td></tr></table></figure>
+<p>这个类也提供一系列的<code>get</code>方法来获取特定单位:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Month month = now.getMonth();</div><div class="line">System.out.println(<span class="string">"当前月份: "</span> + month);</div></pre></td></tr></table></figure>
+<h2 id="日期格式化"><a href="#日期格式化" class="headerlink" title="日期格式化"></a>日期格式化</h2><p>在日常开发中我们用到最多的也许就是日期、时间的格式化了，那在Java8种该如何操作呢？</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDateTime now = LocalDateTime.now();</div><div class="line">DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</div><div class="line"></div><div class="line">System.out.println(<span class="string">"默认格式化: "</span> + now);</div><div class="line">System.out.println(<span class="string">"自定义格式化: "</span> + now.format(dateTimeFormatter));</div><div class="line"></div><div class="line">LocalDateTime localDateTime = LocalDateTime.parse(<span class="string">"2017-07-20 15:27:44"</span>, dateTimeFormatter);</div><div class="line">System.out.println(<span class="string">"字符串转LocalDateTime: "</span> + localDateTime);</div></pre></td></tr></table></figure>
+<p>也可以使用<code>DateTimeFormatter</code>的<code>format</code>方法将日期、时间格式化为字符串</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(<span class="string">"yyyy-MM-dd"</span>);</div><div class="line">String dateString = dateTimeFormatter.format(LocalDate.now());</div><div class="line">System.out.println(<span class="string">"日期转字符串: "</span> + dateString);</div></pre></td></tr></table></figure>
+<h2 id="日期周期"><a href="#日期周期" class="headerlink" title="日期周期"></a>日期周期</h2><p><code>Period</code>类用于修改给定日期或获得的两个日期之间的区别。</p>
+<p>给初始化的日期添加5天:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDate initialDate = LocalDate.parse(<span class="string">"2017-07-20"</span>);</div><div class="line">LocalDate finalDate   = initialDate.plus(Period.ofDays(<span class="number">5</span>));</div><div class="line">System.out.println(<span class="string">"初始化日期: "</span> + initialDate);</div><div class="line">System.out.println(<span class="string">"加日期之后: "</span> + finalDate);</div></pre></td></tr></table></figure>
+<p>周期API中提供给我们可以比较两个日期的差别，像下面这样获取差距天数:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">long</span> between = ChronoUnit.DAYS.between(initialDate, finalDate);</div><div class="line">System.out.println(<span class="string">"差距天数: "</span> + between);</div></pre></td></tr></table></figure>
+<p>上面的代码会返回5，当然你想获取两个日期相差多少小时也是简单的。</p>
+<h2 id="与遗留代码转换"><a href="#与遗留代码转换" class="headerlink" title="与遗留代码转换"></a>与遗留代码转换</h2><p>在之前的代码中你可能出现了大量的<code>Date</code>类，如何将它转换为Java8种的时间类呢？</p>
+<p><code>Date</code>和<code>Instant</code>互相转换</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Date date = Date.from(Instant.now());</div><div class="line">Instant instant = date.toInstant();</div></pre></td></tr></table></figure>
+<p><code>Date</code>转换为<code>LocalDateTime</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">LocalDateTime localDateTime = LocalDateTime.from(<span class="keyword">new</span> Date());</div><div class="line">System.out.println(localDateTime);</div></pre></td></tr></table></figure>
+<p><code>LocalDateTime</code>转<code>Date</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Date date =</div><div class="line">    Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());</div></pre></td></tr></table></figure>
+<p><code>LocalDate</code>转<code>Date</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Date date =</div><div class="line">    Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+        原创文章，转载请注明： 转载自<a href="http://biezhi.me" target="_blank">王爵的技术博客</a><br/>本文链接地址：<a href="/2017/07/20/keep-up-with-java8-datetime.html" target="_blank" rel="external">http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html</a>
+        
+    </div>
+    <footer>
+        <a href="http://biezhi.me">
+            <img src="/img/avatar.png" alt="王爵nice">
+            王爵nice
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java8/">Java8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/datetime/">datetime</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html&title=《跟上Java8 - 日期和时间实用技巧》 — 王爵的技术博客&pic=http://biezhi.me/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html&title=《跟上Java8 - 日期和时间实用技巧》 — 王爵的技术博客&source=当你开始使用Java操作日期和时间的时候，会有一些棘手。你也许会通过System.currentTimeMillis()
+来返回1970年1月1日到今天的..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《跟上Java8 - 日期和时间实用技巧》 — 王爵的技术博客&url=http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html&via=http://biezhi.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/07/21/my-chrome-extensions.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">分享我安装的Chrome插件</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/07/19/keep-up-with-java8-functional-programming.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">跟上Java8 - 函数式编程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'biezhi';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢支持 :)
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>王爵nice &copy; 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html&title=《跟上Java8 - 日期和时间实用技巧》 — 王爵的技术博客&pic=http://biezhi.me/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html&title=《跟上Java8 - 日期和时间实用技巧》 — 王爵的技术博客&source=当你开始使用Java操作日期和时间的时候，会有一些棘手。你也许会通过System.currentTimeMillis()
+来返回1970年1月1日到今天的..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《跟上Java8 - 日期和时间实用技巧》 — 王爵的技术博客&url=http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html&via=http://biezhi.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://biezhi.me/2017/07/20/keep-up-with-java8-datetime.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACHklEQVR42u3aO3LDMAwFwNz/0k7rxtIDoGTG4LLyZCST6wLBhz8/8Xq9rfe/JE9+eubT91y/O1oYGBhfy3hdrmtGsmVy6GTfT89gYGCcw8i37x2rF4KTs2FgYGBMPvdCJwYGBsZTjDx9TIJsr1TGwMA4jZEUk9fI/Jnr7//zWhwDA+MLGXnX/f8//8l8AwMD46sYr+LKU7rrXapB+eZUGBgYqxl5gKumaNVWWjXgYmBgYPSuWUwC6/xKBwYGxm5GcpT86D1eb0jwkYeBgbGOUU3g8tCZjwSS77z5V4GBgbGUkR83v5wxSfuqY9Hyr46BgbGCUd2s2kpLkr9yEYuBgXEAo1dY5qOCKqk6fsDAwNjNeLYdVi2Jq89EI0wMDIyljLxMzRtkk8sW1YQSAwNjN6PaIOtRq+OEahDHwMDYzcibbr34/WwgvgFjYGAsZUzCYu8qRg9/8yNiYGAcwHi4yRWkdIUjJkgMDIzVjHkTLX+meuEjD/oYGBgnMPKNe8liPigdDQ8wMDAOYFSvZ+VpYl6+9kYLGBgY5zAmI8nqaHNSEhdyWwwMjBWMV3FNLlIkieAD9TcGBsY6Rr6SwjUpTfPgXi5iMTAwVjOqzf15EvlUwMXAwDiNUU3gJrzqu9GOGBgYGPGViPxYvbbdTUWOgYGB0bqcMXkrSR8xMDDOYfTa/b2CNjpWNVhjYGCsZvRKx+tw2QvBk0wPAwNjKeMXoAxBz8P4vpgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.6.10"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.6.10" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
