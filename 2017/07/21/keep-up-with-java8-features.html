@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>跟上Java8 - 你忽略了的新特性 | 王爵的技术博客 | 一个后端程序员的笔记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java8,features">
+    <meta name="description" content="虽然我们开始了Java8的旅程，但是很多人直接从java6上手了java8， 也许有一些JDK7的特性你还不知道，在本章节中带你回顾一下我们忘记了的那些特性。 尽管我们不能讲所有特性都讲一遍，挑出常用的核心特性拎出来一起学习。">
+<meta name="keywords" content="Java8,features">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跟上Java8 - 你忽略了的新特性">
+<meta property="og:url" content="http://biezhi.me/2017/07/21/keep-up-with-java8-features.html">
+<meta property="og:site_name" content="王爵的技术博客">
+<meta property="og:description" content="虽然我们开始了Java8的旅程，但是很多人直接从java6上手了java8， 也许有一些JDK7的特性你还不知道，在本章节中带你回顾一下我们忘记了的那些特性。 尽管我们不能讲所有特性都讲一遍，挑出常用的核心特性拎出来一起学习。">
+<meta property="og:image" content="http://biezhi.me/static/img/article/java8-new-features.jpg">
+<meta property="og:updated_time" content="2017-07-23T09:36:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跟上Java8 - 你忽略了的新特性">
+<meta name="twitter:description" content="虽然我们开始了Java8的旅程，但是很多人直接从java6上手了java8， 也许有一些JDK7的特性你还不知道，在本章节中带你回顾一下我们忘记了的那些特性。 尽管我们不能讲所有特性都讲一遍，挑出常用的核心特性拎出来一起学习。">
+<meta name="twitter:image" content="http://biezhi.me/static/img/article/java8-new-features.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="王爵的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.10">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">王爵nice</h5>
+          <a href="mailto:biezhi.me@gmail.com" title="biezhi.me@gmail.com" class="mail">biezhi.me@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-cubes"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/design"  >
+                <i class="icon icon-lg icon-dribbble"></i>
+                设计
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-leaf"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/biezhi" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">跟上Java8 - 你忽略了的新特性</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">跟上Java8 - 你忽略了的新特性</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-07-20T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-07-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/跟上Java8/">跟上Java8</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#异常改进"><span class="post-toc-number">1.</span> <span class="post-toc-text">异常改进</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#try-with-resources"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">try-with-resources</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#catch多个Exception"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">catch多个Exception</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#处理反射异常"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">处理反射异常</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件操作"><span class="post-toc-number">2.</span> <span class="post-toc-text">文件操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Path"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Path</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#读写文件"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">读写文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建、移动、删除"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">创建、移动、删除</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#小的改进"><span class="post-toc-number">3.</span> <span class="post-toc-text">小的改进</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">字符串</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#集合"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">集合</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注解"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">注解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重复注解"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">重复注解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Null检查"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">Null检查</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Optional"><span class="post-toc-number">4.</span> <span class="post-toc-text">Optional</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#处理空指针"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">处理空指针</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Optional方法"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">Optional方法</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-keep-up-with-java8-features"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">跟上Java8 - 你忽略了的新特性</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-07-21 00:00:00" datetime="2017-07-20T16:00:00.000Z"  itemprop="datePublished">2017-07-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/跟上Java8/">跟上Java8</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>虽然我们开始了Java8的旅程，但是很多人直接从java6上手了java8，
+也许有一些JDK7的特性你还不知道，在本章节中带你回顾一下我们忘记了的那些特性。
+尽管我们不能讲所有特性都讲一遍，挑出常用的核心特性拎出来一起学习。</p>
+<a id="more"></a>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/static/img/article/java8-new-features.jpg" alt="新特新" width="550" height="350" title="">
+                </div>
+                <div class="image-caption">新特新</div>
+            </figure>
+<h2 id="异常改进"><a href="#异常改进" class="headerlink" title="异常改进"></a>异常改进</h2><h3 id="try-with-resources"><a href="#try-with-resources" class="headerlink" title="try-with-resources"></a>try-with-resources</h3><p>这个特性是在JDK7种出现的，我们在之前操作一个流对象的时候大概是这样的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    <span class="comment">// 使用流对象</span></div><div class="line">    stream.read();</div><div class="line">    stream.write();</div><div class="line">&#125; <span class="keyword">catch</span>(Exception e)&#123;</div><div class="line">    <span class="comment">// 处理异常</span></div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    <span class="comment">// 关闭流资源</span></div><div class="line">    <span class="keyword">if</span>(stream != <span class="keyword">null</span>)&#123;</div><div class="line">        stream.close();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样无疑有些繁琐，而且<code>finally</code>块还有可能抛出异常。在JDK7种提出了<code>try-with-resources</code>机制，
+它规定你操作的类只要是实现了<code>AutoCloseable</code>接口就可以在<code>try</code>语句块退出的时候自动调用<code>close</code>
+方法关闭流资料。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">tryWithResources</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    <span class="keyword">try</span>( InputStream ins = <span class="keyword">new</span> FileInputStream(<span class="string">"/home/biezhi/a.txt"</span>) )&#123;</div><div class="line">        <span class="keyword">char</span> charStr = (<span class="keyword">char</span>) ins.read();</div><div class="line">        System.out.print(charStr);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>使用多个资源</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">try</span> ( InputStream is  = <span class="keyword">new</span> FileInputStream(<span class="string">"/home/biezhi/a.txt"</span>);</div><div class="line">      OutputStream os = <span class="keyword">new</span> FileOutputStream(<span class="string">"/home/biezhi/b.txt"</span>)</div><div class="line">) &#123;</div><div class="line">    <span class="keyword">char</span> charStr = (<span class="keyword">char</span>) is.read();</div><div class="line">    os.write(charStr);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当然如果你使用的是非标准库的类也可以自定义<code>AutoCloseable</code>，只要实现其<code>close</code>方法即可。</p>
+<h3 id="catch多个Exception"><a href="#catch多个Exception" class="headerlink" title="catch多个Exception"></a>catch多个Exception</h3><p>当我们在操作一个对象的时候，有时候它会抛出多个异常，像这样：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    Thread.sleep(<span class="number">20000</span>);</div><div class="line">    FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"/a/b.txt"</span>);</div><div class="line">&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样代码写起来要捕获很多异常，不是很优雅，JDK7种允许你捕获多个异常:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    Thread.sleep(<span class="number">20000</span>);</div><div class="line">    FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"/a/b.txt"</span>);</div><div class="line">&#125; <span class="keyword">catch</span> (InterruptedException | IOException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>并且<code>catch</code>语句后面的异常参数是<code>final</code>的，不可以再修改/复制。</p>
+<h3 id="处理反射异常"><a href="#处理反射异常" class="headerlink" title="处理反射异常"></a>处理反射异常</h3><p>使用过反射的同学可能知道我们有时候操作反射方法的时候会抛出很多不相关的检查异常，例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    Class&lt;?&gt; clazz = Class.forName(<span class="string">"com.biezhi.apple.User"</span>);</div><div class="line">    clazz.getMethods()[<span class="number">0</span>].invoke(object);</div><div class="line">&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>尽管你可以使用<code>catch</code>多个异常的方法将上述异常都捕获，但这也让人感到痛苦。
+JDK7修复了这个缺陷，引入了一个新类<code>ReflectiveOperationException</code>可以帮你捕获这些反射异常:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    Class&lt;?&gt; clazz = Class.forName(<span class="string">"com.biezhi.apple.User"</span>);</div><div class="line">    clazz.getMethods()[<span class="number">0</span>].invoke(object);</div><div class="line">&#125; <span class="keyword">catch</span> (ReflectiveOperationException e)&#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><p>我们知道在JDK6甚至之前的时候，我们想要读取一个文本文件也是非常麻烦的一件事，而现在他们都变得简单了，
+这要归功于<code>NIO2</code>，我们先看看之前的做饭:</p>
+<p><strong>读取一个文本文件</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">BufferedReader br = <span class="keyword">null</span>;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(<span class="string">"file.txt"</span>));</div><div class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">    String line      = br.readLine();</div><div class="line">    <span class="keyword">while</span> (line != <span class="keyword">null</span>) &#123;</div><div class="line">        sb.append(line);</div><div class="line">        sb.append(System.lineSeparator());</div><div class="line">        line = br.readLine();</div><div class="line">    &#125;</div><div class="line">    String everything = sb.toString();</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e)&#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        br.close();</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>大家对这样的一段代码一定不陌生，但这样太繁琐了，我只想读取一个文本文件，要写这么多代码还要
+处理让人头大的一堆异常，怪不得别人吐槽Java臃肿，是在线输了。。。</p>
+<p>下面我要介绍在JDK7中是如何改善这些问题的。</p>
+<h3 id="Path"><a href="#Path" class="headerlink" title="Path"></a>Path</h3><p><code>Path</code>用于来表示文件路径和文件，和<code>File</code>对象类似，<code>Path</code>对象并不一定要对应一个实际存在的文件，
+它只是一个路径的抽象序列。</p>
+<p>要创建一个<code>Path</code>对象有多种方法，首先是final类Paths的两个static方法，如何从一个路径字符串来构造Path对象：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Path path1   = Paths.get(<span class="string">"/home/biezhi"</span>, <span class="string">"a.txt"</span>);</div><div class="line">Path path2   = Paths.get(<span class="string">"/home/biezhi/a.txt"</span>);</div><div class="line"></div><div class="line">URI  u       = URI.create(<span class="string">"file:////home/biezhi/a.txt"</span>);</div><div class="line">Path pathURI = Paths.get(u);</div></pre></td></tr></table></figure>
+<p>通过<code>FileSystems</code>构造</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Path filePath = FileSystems.getDefault().getPath(<span class="string">"/home/biezhi"</span>, <span class="string">"a.txt"</span>);</div></pre></td></tr></table></figure>
+<p><code>Path</code>、<code>URI</code>、<code>File</code>之间的转换</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">File file  = <span class="keyword">new</span> File(<span class="string">"/home/biezhi/a.txt"</span>);</div><div class="line">Path p1    = file.toPath();</div><div class="line">p1.toFile();</div><div class="line">file.toURI();</div></pre></td></tr></table></figure>
+<h3 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h3><p>你可以使用<code>Files</code>类快速实现文件操作，例如读取文件内容:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">byte</span>[] data    = Files.readAllBytes(Paths.get(<span class="string">"/home/biezhi/a.txt"</span>));</div><div class="line">String content = <span class="keyword">new</span> String(data, StandardCharsets.UTF_8);</div></pre></td></tr></table></figure>
+<p>如果希望按照行读取文件，可以调用</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;String&gt; lines = Files.readAllLines(Paths.get(<span class="string">"/home/biezhi/a.txt"</span>));</div></pre></td></tr></table></figure>
+<p>反之你想将字符串写入到文件可以调用</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Files.write(Paths.get(<span class="string">"/home/biezhi/b.txt"</span>), <span class="string">"Hello JDK7!"</span>.getBytes());</div></pre></td></tr></table></figure>
+<p>你也可以按照行写入文件，<code>Files.write</code>方法的参数中支持传递一个实现<code>Iterable</code>接口的类实例。
+将内容追加到指定文件可以使用<code>write</code>方法的第三个参数<code>OpenOption</code>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Files.write(Paths.get(<span class="string">"/home/biezhi/b.txt"</span>), <span class="string">"Hello JDK7!"</span>.getBytes(),</div><div class="line"> StandardOpenOption.APPEND);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>默认情况Files类中的所有方法都会使用UTF-8编码进行操作，当你不愿意这么干的时候可以传递Charset参数进去变更。</p>
+</blockquote>
+<p>当前<code>Files</code>还有一些其他的常用方法:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">InputStream ins  = Files.newInputStream(path);</div><div class="line">OutputStream ops = Files.newOutputStream(path);</div><div class="line">Reader reader    = Files.newBufferedReader(path);</div><div class="line">Writer writer    = Files.newBufferedWriter(path);</div></pre></td></tr></table></figure>
+<h3 id="创建、移动、删除"><a href="#创建、移动、删除" class="headerlink" title="创建、移动、删除"></a>创建、移动、删除</h3><p>创建文件、目录</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (!Files.exists(path)) &#123;</div><div class="line">    Files.createFile(path);</div><div class="line">    Files.createDirectory(path);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>Files</code>还提供了一些方法让我们创建临时文件/临时目录:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Files.createTempFile(dir, prefix, suffix);</div><div class="line">Files.createTempFile(prefix, suffix);</div><div class="line">Files.createTempDirectory(dir, prefix);</div><div class="line">Files.createTempDirectory(prefix);</div></pre></td></tr></table></figure>
+<p>这里的<code>dir</code>是一个<code>Path</code>对象，并且字符串prefix和suffix都可能为null。
+例如调用<code>Files.createTempFile(null, &quot;.txt&quot;)</code>会返回一个类似<code>/tmp/21238719283331124678.txt</code></p>
+<blockquote>
+<p>读取一个目录下的文件请使用<code>Files.list</code>和<code>Files.walk</code>方法</p>
+</blockquote>
+<p>复制、移动一个文件内容到某个路径</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Files.copy(in, path);</div><div class="line">Files.move(path, path);</div></pre></td></tr></table></figure>
+<p>删除一个文件</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Files.delete(path);</div></pre></td></tr></table></figure>
+<h2 id="小的改进"><a href="#小的改进" class="headerlink" title="小的改进"></a>小的改进</h2><p>Java8是一个较大改变的版本，包含了API和库方面的修正，它还对我们常用的API进行很多微小的调整，
+下面我会带你了解字符串、集合、注解等新方法。</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>使用过JavaScript语言的人可能会知道当我们将一个数组中的元素组合起来变成字符串有一个方法<code>join</code>，
+例如我们经常用到将数组中的字符串拼接成用逗号分隔的一长串，这在Java中是要写for循环来完成的。</p>
+<p>Java8种添加了<code>join</code>方法帮你搞定这一切:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">String str = String.join(<span class="string">","</span>, <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>);</div></pre></td></tr></table></figure>
+<p>第一个参数是分隔符，后面接收一个<code>CharSequence</code>类型的可变参数数组或一个<code>Iterable</code>。</p>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p>集合改变中最大的当属前面章节中提到的<code>Stream API</code>，除此之外还有一些小的改动。</p>
+<table>
+<thead>
+<tr>
+<th>类/接口</th>
+<th>新方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Iterable</td>
+<td>foreach</td>
+</tr>
+<tr>
+<td>Collection</td>
+<td>removeIf</td>
+</tr>
+<tr>
+<td>List</td>
+<td>replaceAll, sort</td>
+</tr>
+<tr>
+<td>Map</td>
+<td>forEach, replace, replaceAll, remove(key, value),<br> putIfAbsent, compute, computeIf, merge</td>
+</tr>
+<tr>
+<td>Iterator</td>
+<td>forEachRemaining</td>
+</tr>
+<tr>
+<td>BitSet</td>
+<td>stream</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Map中的很多方法对并发访问十分重要，我们将在后面的章节中介绍</li>
+<li>Iterator提供forEachRemaining将剩余的元素传递给一个函数</li>
+<li>BitSet可以产生一个Stream对象</li>
+</ul>
+<p><strong>通用目标类型判断</strong></p>
+<p>Java8对泛型参数的推断进行了增强。相信你对Java8之前版本中的类型推断已经比较熟悉了。
+比如，Java中的方法<code>emptyList</code>方法定义如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">emptyList</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure>
+<p><code>emptyList</code>方法使用了类型参数T进行参数化。
+你可以像下面这样为该类型参数提供一个显式的类型进行函数调用：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;Person&gt; persons = Collections.&lt;Person&gt;emptyList();</div></pre></td></tr></table></figure>
+<p>不过Java也可以推断泛型参数的类型，上面的代码和下面这段代码是等价的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;Person&gt; persons = Collections.emptyList();</div></pre></td></tr></table></figure>
+<p>我还是习惯于这样书写。</p>
+<h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><p>Java 8在两个方面对注解机制进行了改进，分别为：</p>
+<ul>
+<li>可以定义重复注解</li>
+<li>可以为任何类型添加注解</li>
+</ul>
+<h3 id="重复注解"><a href="#重复注解" class="headerlink" title="重复注解"></a>重复注解</h3><p>之前版本的Java禁止对同样的注解类型声明多次。由于这个原因，下面的第二句代码是无效的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@interface</span> Basic &#123;</div><div class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Basic</span>(name=<span class="string">"fix"</span>)</div><div class="line"><span class="meta">@Basic</span>(name=<span class="string">"todo"</span>)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123; &#125;</div></pre></td></tr></table></figure>
+<p>我们之前可能会通过数组的做法绕过这一限制:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@interface</span> Basic &#123;</div><div class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@interface</span> Basics &#123;</div><div class="line">    Basic[] value();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Basics</span>( &#123; <span class="meta">@Basic</span>(name=<span class="string">"fix"</span>) , <span class="meta">@Basic</span>(name=<span class="string">"todo"</span>) &#125; )</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123; &#125;</div></pre></td></tr></table></figure>
+<p>Book类的嵌套注解相当难看。这就是Java8想要从根本上移除这一限制的原因，去掉这一限制后，
+代码的可读性会好很多。现在，如果你的配置允许重复注解，你可以毫无顾虑地一次声明多个同一种类型的注解。
+它目前还不是默认行为，你需要显式地要求进行重复注解。</p>
+<p><strong>创建一个重复注解</strong></p>
+<p>如果一个注解在设计之初就是可重复的，你可以直接使用它。但是，如果你提供的注解是为用户提供的，
+那么就需要做一些工作，说明该注解可以重复。下面是你需要执行的两个步骤：</p>
+<ol>
+<li>将注解标记为<code>@Repeatable</code></li>
+<li>提供一个注解的容器下面的例子展示了如何将<code>@Basic</code>注解修改为可重复注解</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Repeatable</span>(Basics.class)</div><div class="line"><span class="meta">@interface</span> Basic &#123;</div><div class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@interface</span> Basics &#123;</div><div class="line">    Basic[] value();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>完成了这样的定义之后，<code>Person</code>类可以通过多个<code>@Basic</code>注解进行注释，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Basic</span>(name=<span class="string">"fix"</span>)</div><div class="line"><span class="meta">@Basic</span>(name=<span class="string">"todo"</span>)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123; &#125;</div></pre></td></tr></table></figure>
+<p>编译时， Person 会被认为使用了 <code>@Basics( { @Basic(name=&quot;fix&quot;) , @Basic(name=&quot;todo&quot;)} )</code>
+这样的形式进行了注解，所以，你可以把这种新的机制看成是一种语法糖，
+它提供了程序员之前利用的惯用法类似的功能。为了确保与反射方法在行为上的一致性，
+注解会被封装到一个容器中。 Java API中的<code>getAnnotation(Class&lt;T&gt; annotationClass)</code>方法会为注解元素返回类型为<code>T</code>的注解。
+如果实际情况有多个类型为<code>T</code>的注解，该方法的返回到底是哪一个呢？</p>
+<p>我们不希望一下子就陷入细节的魔咒，类<code>Class</code>提供了一个新的<code>getAnnotationsByType</code>方法，
+它可以帮助我们更好地使用重复注解。比如，你可以像下面这样打印输出<code>Person</code>类的所有<code>Basic</code>注解：</p>
+<p>返回一个由重复注解<code>Basic</code>组成的数组</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    Basic[] basics = Person.class.getAnnotationsByType(Basic.class);</div><div class="line">    Arrays.asList(basics).forEach(a -&gt; &#123; System.out.println(a.name()); &#125;); &#125;</div></pre></td></tr></table></figure>
+<h3 id="Null检查"><a href="#Null检查" class="headerlink" title="Null检查"></a>Null检查</h3><p><code>Objects</code>类添加了两个静态方法<code>isNull</code>和<code>nonNull</code>，在使用流的时候非常有用。</p>
+<p>例如获取一个流的所有不为null的对象:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Stream.of(<span class="string">"a"</span>, <span class="string">"c"</span>, <span class="keyword">null</span>, <span class="string">"d"</span>)</div><div class="line">        .filter(Objects::nonNull)</div><div class="line">        .forEach(System.out::println);</div></pre></td></tr></table></figure>
+<h2 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h2><p>空指针异常一直是困扰Java程序员的问题，也是我们必须要考虑的。当业务代码中充满了<code>if else</code>判断<code>null</code>
+的时候程序变得不再优雅，在Java8中提供了<code>Optional</code>类为我们解决<code>NullPointerException</code>。</p>
+<p>我们先来看看这段代码有什么问题?</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">    String name;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getUserName</span><span class="params">(User user)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> user.getName();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码看起来很正常，每个<code>User</code>都会有一个名字。所以调用<code>getUserName</code>方法会发生什么呢？
+实际这是不健壮的程序代码，当<code>User</code>对象为null的时候会抛出一个空指针异常。</p>
+<p>我们普遍的做法是通过判断<code>user != null</code>然后获取名称</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getUserName</span><span class="params">(User user)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(user != <span class="keyword">null</span>)&#123;</div><div class="line">        <span class="keyword">return</span> user.getName();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是如果对象嵌套的层次比较深的时候这样的判断我们需要编写多少次呢？难以想象</p>
+<h3 id="处理空指针"><a href="#处理空指针" class="headerlink" title="处理空指针"></a>处理空指针</h3><p><strong>使用Optional优化代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getUserNameByOptional</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">    Optional&lt;String&gt; userName = Optional.ofNullable(user).map(User::getName);</div><div class="line">    <span class="keyword">return</span> userName.orElse(<span class="keyword">null</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当<code>user</code>为null的时候我们设置UserName的值为null，否则返回<code>getName</code>的返回值，但此时不会抛出空指针。</p>
+<p>在之前的代码片段中是我们最熟悉的命令式编程思维，写下的代码可以描述程序的执行逻辑，得到什么样的结果。
+后面的这种方式是函数式思维方式，在函数式的思维方式里，结果比过程更重要，不需要关注执行的细节。程序的具体执行由编译器来决定。
+这种情况下提高程序的性能是一个不容易的事情。</p>
+<p>我们再次了解下<code>Optional</code>中的一些使用方法</p>
+<h3 id="Optional方法"><a href="#Optional方法" class="headerlink" title="Optional方法"></a>Optional方法</h3><p><strong>创建 Optional 对象</strong></p>
+<p>你可以通过静态工厂方法<code>Optional.empty</code>，创建一个空的Optional对象：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Optional&lt;User&gt; emptyUser = Optional.empty();</div></pre></td></tr></table></figure>
+<p>创建一个非空值的Optional</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Optional&lt;User&gt; userOptional = Optional.of(user);</div></pre></td></tr></table></figure>
+<p>如果user是一个null，这段代码会立即抛出一个<code>NullPointerException</code>，而不是等到你试图访问<code>user</code>的属性值时才返回一个错误。</p>
+<p>可接受null的Optional</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Optional&lt;User&gt; ofNullOptional = Optional.ofNullable(user);</div></pre></td></tr></table></figure>
+<p>使用静态工厂方法<code>Optional.ofNullable</code>，你可以创建一个允许null值的Optional对象。</p>
+<p>如果user是null，那么得到的Optional对象就是个空对象，但不会让你导致空指针。</p>
+<p>使用<code>map</code>从Optional对象中提取和转换值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Optional&lt;User&gt; ofNullOptional = Optional.ofNullable(user);</div><div class="line">Optional&lt;String&gt; userName = ofNullOptional.map(User::getName);</div></pre></td></tr></table></figure>
+<p>这种操作就像我们之前在操作<code>Stream</code>是一样的，获取的只是<code>User</code>中的一个属性。</p>
+<p><strong>默认行为及解引用Optional对象</strong></p>
+<p>我们决定采用orElse方法读取这个变量的值，使用这种方式你还可以定义一个默认值，
+遭遇空的Optional变量时，默认值会作为该方法的调用返回值。
+Optional类提供了多种方法读取 Optional实例中的变量值。</p>
+<ul>
+<li>get()是这些方法中最简单但又最不安全的方法。如果变量存在，它直接返回封装的变量 值，否则就抛出一个NoSuchElementException异常。所以，除非你非常确定Optional 变量一定包含值，否则使用这个方法是个相当糟糕的主意。此外，这种方式即便相对于 嵌套式的null检查，也并未体现出多大的改进。</li>
+<li>orElse(T other)是我们在代码清单10-5中使用的方法，正如之前提到的，它允许你在 Optional对象不包含值时提供一个默认值。</li>
+<li>orElseGet(Supplier&lt;? extends T&gt; other)是orElse方法的延迟调用版，Supplier 方法只有在Optional对象不含值时才执行调用。如果创建默认值是件耗时费力的工作， 你应该考虑采用这种方式（借此提升程序的性能），或者你需要非常确定某个方法仅在 Optional为空时才进行调用，也可以考虑该方式（这种情况有严格的限制条件）。</li>
+<li>orElseThrow(Supplier&lt;? extends X&gt; exceptionSupplier)和get方法非常类似， 它们遭遇Optional对象为空时都会抛出一个异常，但是使用orElseThrow你可以定制希 望抛出的异常类型。</li>
+<li>ifPresent(Consumer&lt;? super T&gt;)让你能在变量值存在时执行一个作为参数传入的 方法，否则就不进行任何操作。</li>
+</ul>
+<p>当前除了这些Optional类也具备一些和Stream类似的API，我们先看看Optional类方法:</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>empty</td>
+<td>返回一个空的 Optional 实例</td>
+</tr>
+<tr>
+<td>get</td>
+<td>如果该值存在，将该值用Optional包装返回，否则抛出一个<code>NoSuchElementException</code>异常</td>
+</tr>
+<tr>
+<td>ifPresent</td>
+<td>如果值存在，就执行使用该值的方法调用，否则什么也不做</td>
+</tr>
+<tr>
+<td>isPresent</td>
+<td>如果值存在就返回true，否则返回false</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>如果值存在并且满足提供的谓词，就返回包含该值的 Optional 对象;<br>否则返回一个空的Optional对象</td>
+</tr>
+<tr>
+<td>map</td>
+<td>如果值存在，就对该值执行提供的 mapping 函数调用</td>
+</tr>
+<tr>
+<td>flatMap</td>
+<td>如果值存在，就对该值执行提供的 mapping 函数调用，<br>返回一个 Optional 类型的值，否则就返 回一个空的Optional对象</td>
+</tr>
+<tr>
+<td>of</td>
+<td>将指定值用 Optional 封装之后返回，如果该值为null，则抛出一个<code>NullPointerException</code>异常</td>
+</tr>
+<tr>
+<td>ofNullable</td>
+<td>将指定值用 Optional 封装之后返回，如果该值为 null，则返回一个空的Optional对象</td>
+</tr>
+<tr>
+<td>orElse</td>
+<td>如果有值则将其返回，否则返回一个默认值</td>
+</tr>
+<tr>
+<td>orElseGet</td>
+<td>如果有值则将其返回，否则返回一个由指定的 Supplier 接口生成的值</td>
+</tr>
+<tr>
+<td>orElseThrow</td>
+<td>如果有值则将其返回，否则抛出一个由指定的 Supplier 接口生成的异常</td>
+</tr>
+</tbody>
+</table>
+<p><strong>用Optional封装可能为null的值</strong></p>
+<p>目前我们写的大部分Java代码都会使用返回NULL的方式来表示不存在值，比如Map中通过Key获取值，
+当不存在该值会返回一个null。
+但是，正如我们之前介绍的，大多数情况下，你可能希望这些方法能返回一个Optional对象。
+你无法修改这些方法的签名，但是你很容易用Optional对这些方法的返回值进行封装。</p>
+<p>我们接着用Map做例子，假设你有一个<code>Map&lt;String, Object&gt;</code>类型的map，访问由key的值时，
+如果map中没有与key关联的值，该次调用就会返回一个null。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Object value = map.get(<span class="string">"key"</span>);</div></pre></td></tr></table></figure>
+<p>使用Optional封装map的返回值，你可以对这段代码进行优化。要达到这个目的有两种方式：
+你可以使用笨拙的<code>if-then-else</code>判断语句，毫无疑问这种方式会增加代码的复杂度；
+或者你可以采用<code>Optional.ofNullable</code>方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Optional&lt;Object&gt; value = Optional.ofNullable(map.get(<span class="string">"key"</span>));</div></pre></td></tr></table></figure>
+<p>每次你希望安全地对潜在为null的对象进行转换，将其替换为Optional对象时，都可以考虑使用这种方法。</p>
+<p>参考资料：<a href="http://www.cnblogs.com/digdeep/p/4478734.html" target="_blank" rel="external">Java文件IO操作应该抛弃File拥抱Paths和Files</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+        原创文章，转载请注明： 转载自<a href="http://biezhi.me" target="_blank">王爵的技术博客</a><br/>本文链接地址：<a href="/2017/07/21/keep-up-with-java8-features.html" target="_blank" rel="external">http://biezhi.me/2017/07/21/keep-up-with-java8-features.html</a>
+        
+    </div>
+    <footer>
+        <a href="http://biezhi.me">
+            <img src="/img/avatar.png" alt="王爵nice">
+            王爵nice
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java8/">Java8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/features/">features</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://biezhi.me/2017/07/21/keep-up-with-java8-features.html&title=《跟上Java8 - 你忽略了的新特性》 — 王爵的技术博客&pic=http://biezhi.me/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/21/keep-up-with-java8-features.html&title=《跟上Java8 - 你忽略了的新特性》 — 王爵的技术博客&source=虽然我们开始了Java8的旅程，但是很多人直接从java6上手了java8，
+也许有一些JDK7的特性你还不知道，在本章节中带你回顾一下我们忘记了的那些特..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://biezhi.me/2017/07/21/keep-up-with-java8-features.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《跟上Java8 - 你忽略了的新特性》 — 王爵的技术博客&url=http://biezhi.me/2017/07/21/keep-up-with-java8-features.html&via=http://biezhi.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://biezhi.me/2017/07/21/keep-up-with-java8-features.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/07/21/my-chrome-extensions.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">分享我安装的Chrome插件</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'biezhi';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢支持 :)
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>王爵nice &copy; 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://biezhi.me/2017/07/21/keep-up-with-java8-features.html&title=《跟上Java8 - 你忽略了的新特性》 — 王爵的技术博客&pic=http://biezhi.me/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/21/keep-up-with-java8-features.html&title=《跟上Java8 - 你忽略了的新特性》 — 王爵的技术博客&source=虽然我们开始了Java8的旅程，但是很多人直接从java6上手了java8，
+也许有一些JDK7的特性你还不知道，在本章节中带你回顾一下我们忘记了的那些特..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://biezhi.me/2017/07/21/keep-up-with-java8-features.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《跟上Java8 - 你忽略了的新特性》 — 王爵的技术博客&url=http://biezhi.me/2017/07/21/keep-up-with-java8-features.html&via=http://biezhi.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://biezhi.me/2017/07/21/keep-up-with-java8-features.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3a207DMBAE0P7/T5dXJHqZWbdIsU+eUAlxDkiD17u3W3zdX17P7vz9yd97ku9++MLAwLgsI3nF5PN8rWT19teHgYFxAuP1kq/vSRbOefm6GBgYGPmjkyDOwxoDAwPjG4Gbl6/5NhEDAwNjVsTmy7fI119/uBbHwMC4IKM9JvvPr7/S38DAwLgU415eSZMgWSUJ5eKtMDAwtmbkAde2MNujtDZwMTAwMPL4awcm2l9KUbJiYGBsypgdXSWjXbPvtk2CBztcDAyMIxnrzctPxfHTd8DAwNiaMdsytpvIdlAsL4OH/x8wMDC2YLTjF20ct7Cl0QoMDIyNGHnR2C7TkvIhsAefY2BgHMBY2fC1bcv2nqgXgIGBsR0jOnYPojMPynzAImms3mYPwsDAuCxjdii2fvQ2O2LDwMDAWInXHNkG8VMwBgbGAYxZmdq+9MpPRUUsBgbGpox287d+cN+uUiAxMDAOZuSjEitFb1JCv3kmBgbGAYz1EJyNWcyK2DeHbhgYGJsy8sBNxjKSDWU+ThG1EDAwMA5g5FuxWfi2z2lDHwMDY1fGrDG5Er4rT3jzd8DAwNiUkV/J5iyP6fWCdgjDwMC4LKMN2RbZNjLzd8DAwDiN0QZf3tTMj8/y6MfAwMBoYzEvXz/bFh32UTEwMA5gzJqdecgmNfebFiYGBsamjHq4YVSOzsbOovsxMDC2ZsxKx9nWcH1oY6mpiYGBcT3GD/LfQc9ZELiZAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.6.10"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.6.10" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
