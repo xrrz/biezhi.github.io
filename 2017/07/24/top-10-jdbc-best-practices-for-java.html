@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>十个JDBC的最佳实践 | 王爵的技术博客 | 一个后端程序员的笔记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JDBC,最佳实践,连接池">
+    <meta name="description" content="JDBC是Java为多种关系型数据库提供的统一的访问接口，以下是我长期使用JDBC总结的十个最佳实践。 1. 使用PrearedStatement任何一个使用过JDBC的Java程序员几乎都知道这个，PreparedStatment可以通过预编译的方式避免我们在拼接SQL时造成SQL注入。">
+<meta name="keywords" content="JDBC,最佳实践,连接池">
+<meta property="og:type" content="article">
+<meta property="og:title" content="十个JDBC的最佳实践">
+<meta property="og:url" content="http://biezhi.me/2017/07/24/top-10-jdbc-best-practices-for-java.html">
+<meta property="og:site_name" content="王爵的技术博客">
+<meta property="og:description" content="JDBC是Java为多种关系型数据库提供的统一的访问接口，以下是我长期使用JDBC总结的十个最佳实践。 1. 使用PrearedStatement任何一个使用过JDBC的Java程序员几乎都知道这个，PreparedStatment可以通过预编译的方式避免我们在拼接SQL时造成SQL注入。">
+<meta property="og:updated_time" content="2017-07-25T07:25:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="十个JDBC的最佳实践">
+<meta name="twitter:description" content="JDBC是Java为多种关系型数据库提供的统一的访问接口，以下是我长期使用JDBC总结的十个最佳实践。 1. 使用PrearedStatement任何一个使用过JDBC的Java程序员几乎都知道这个，PreparedStatment可以通过预编译的方式避免我们在拼接SQL时造成SQL注入。">
+    
+        <link rel="alternate" type="application/atom+xml" title="王爵的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.10">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">王爵nice</h5>
+          <a href="mailto:biezhi.me@gmail.com" title="biezhi.me@gmail.com" class="mail">biezhi.me@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-cubes"></i>
+                项目
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/design"  >
+                <i class="icon icon-lg icon-dribbble"></i>
+                设计
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-leaf"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/biezhi" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">十个JDBC的最佳实践</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">十个JDBC的最佳实践</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-07-23T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-07-24
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-使用PrearedStatement"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 使用PrearedStatement</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-使用ConnectionPool（连接池）"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. 使用ConnectionPool（连接池）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-禁用自动提交"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 禁用自动提交</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-使用Batch-Update"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. 使用Batch Update</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-使用列名获取ResultSet中的数据，从而避免invalidColumIndexError"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. 使用列名获取ResultSet中的数据，从而避免invalidColumIndexError</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-使用变量绑定而不是字符串拼接"><span class="post-toc-number">6.</span> <span class="post-toc-text">6. 使用变量绑定而不是字符串拼接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-要记住关闭Statement、PreparedStatement和Connection"><span class="post-toc-number">7.</span> <span class="post-toc-text">7. 要记住关闭Statement、PreparedStatement和Connection</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-选择合适的JDBC驱动"><span class="post-toc-number">8.</span> <span class="post-toc-text">8. 选择合适的JDBC驱动</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-尽量使用标准的SQL语句，从而在某种程度上避免数据库对SQL支持的差异"><span class="post-toc-number">9.</span> <span class="post-toc-text">9. 尽量使用标准的SQL语句，从而在某种程度上避免数据库对SQL支持的差异</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-使用正确的getXXX-方法"><span class="post-toc-number">10.</span> <span class="post-toc-text">10. 使用正确的getXXX()方法</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-top-10-jdbc-best-practices-for-java"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">十个JDBC的最佳实践</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-07-24 00:00:00" datetime="2017-07-23T16:00:00.000Z"  itemprop="datePublished">2017-07-24</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>JDBC是Java为多种关系型数据库提供的统一的访问接口，以下是我长期使用JDBC总结的十个最佳实践。</p>
+<h2 id="1-使用PrearedStatement"><a href="#1-使用PrearedStatement" class="headerlink" title="1. 使用PrearedStatement"></a>1. 使用PrearedStatement</h2><p>任何一个使用过JDBC的Java程序员几乎都知道这个，<code>PreparedStatment</code>可以通过预编译的方式避免我们在拼接SQL时造成SQL注入。</p>
+<a id="more"></a>
+<h2 id="2-使用ConnectionPool（连接池）"><a href="#2-使用ConnectionPool（连接池）" class="headerlink" title="2. 使用ConnectionPool（连接池）"></a>2. 使用ConnectionPool（连接池）</h2><p>使用连接池作为最佳实践几乎都成了公认的标准。一些框架已经提供了内建的连接池支持，
+例如Spring中的<code>Database Connection Pool</code>，如果你的应用部署在JavaEE的应用服务器中，
+例如JBoss，WAS，这些服务器也会有内建的连接池支持，例如DBCP。
+使用连接的原因简单的说就是因为创建JDBC连接耗时比较长，如果每次查询都重新打开一个连接，
+然后关闭，性能将会非常低，而如果事先创建好一批连接缓存起来，使用的时候取出，
+不使用的时候仍不关闭，将会节省大量的创建关闭连接的时间。</p>
+<h2 id="3-禁用自动提交"><a href="#3-禁用自动提交" class="headerlink" title="3. 禁用自动提交"></a>3. 禁用自动提交</h2><p>这个最佳实践在我们使用JDBC的批量提交的时候显得非常有用，将自动提交禁用后，
+你可以将一组数据库操作放在一个事务中，而自动提交模式每次执行SQL语句都将执行自己的事务，
+并且在执行结束提交。</p>
+<h2 id="4-使用Batch-Update"><a href="#4-使用Batch-Update" class="headerlink" title="4. 使用Batch Update"></a>4. 使用Batch Update</h2><p>JDBC的API提供了通过addBatch()方法向batch中添加SQL查询，然后通过<code>executeBatch()</code>执行批量的查询。
+<code>JDBC batch update</code>可以减少数据库数据传输的往返次数，从而提高性能。</p>
+<h2 id="5-使用列名获取ResultSet中的数据，从而避免invalidColumIndexError"><a href="#5-使用列名获取ResultSet中的数据，从而避免invalidColumIndexError" class="headerlink" title="5. 使用列名获取ResultSet中的数据，从而避免invalidColumIndexError"></a>5. 使用列名获取ResultSet中的数据，从而避免invalidColumIndexError</h2><p>JDBC中的查询结果封装在ResultSet中，我们可以通过列名和列序号两种方 式获取查询的数据，
+当我们传入的列序号不正确的时候，就会抛出invalidColumIndexException，
+例如你传入了0，就会出错，因为<code>ResultSet</code>中的列序号是从1开始的。
+另外，如果你更改了数据表中列的顺序，你也不必更改JDBC代码，保持了程序的健壮性。
+有一些Java程序员 可能会说通过序号访问列要比列名访问快一些，确实是这样，但是为了程序的健壮性、可读性，我还是更推荐你使用列名来访问。</p>
+<h2 id="6-使用变量绑定而不是字符串拼接"><a href="#6-使用变量绑定而不是字符串拼接" class="headerlink" title="6. 使用变量绑定而不是字符串拼接"></a>6. 使用变量绑定而不是字符串拼接</h2><p>在第一条最佳实践中，我们已经说过要使用PreparedStatment可以防止注入，而使用？
+或者其他占位符也会提升性能，因为这样数据库就可以使用不同的参数执行相同的查询，
+这个最佳实践带来更高的性能的同时也防止了SQL注入。</p>
+<h2 id="7-要记住关闭Statement、PreparedStatement和Connection"><a href="#7-要记住关闭Statement、PreparedStatement和Connection" class="headerlink" title="7. 要记住关闭Statement、PreparedStatement和Connection"></a>7. 要记住关闭Statement、PreparedStatement和Connection</h2><p>通常的做法是在<code>finally</code>块中关闭它们，这样做的好处是不论语句执行正确与否，
+不管是否有异常抛出，都能保证资源被释放。在Java7中，可以通过<code>Automatic Resource Management Block</code>来自动的关闭资源。</p>
+<h2 id="8-选择合适的JDBC驱动"><a href="#8-选择合适的JDBC驱动" class="headerlink" title="8. 选择合适的JDBC驱动"></a>8. 选择合适的JDBC驱动</h2><p>有四种JDBC驱动，分别是</p>
+<ol>
+<li>JDBC-ODBC Bridge driver (bridge driver)</li>
+<li>Native-API/partly Java driver (native driver)</li>
+<li>AllJava/Net-protocol driver (middleware driver)</li>
+<li>All Java/Native-protocol driver (Pure java driver)</li>
+</ol>
+<h2 id="9-尽量使用标准的SQL语句，从而在某种程度上避免数据库对SQL支持的差异"><a href="#9-尽量使用标准的SQL语句，从而在某种程度上避免数据库对SQL支持的差异" class="headerlink" title="9. 尽量使用标准的SQL语句，从而在某种程度上避免数据库对SQL支持的差异"></a>9. 尽量使用标准的SQL语句，从而在某种程度上避免数据库对SQL支持的差异</h2><p>不同的数据库厂商的数据库产品支持的SQL的语法会有一定的出入，为了方便移植，我推荐使用标准的ANSI SQL标准写SQL语句。</p>
+<h2 id="10-使用正确的getXXX-方法"><a href="#10-使用正确的getXXX-方法" class="headerlink" title="10. 使用正确的getXXX()方法"></a>10. 使用正确的getXXX()方法</h2><p>当从ResultSet中读取数据的时候，虽然JDBC允许你使用<code>getString()</code>和<code>getObject()</code>方法获取任何数据类型，
+推荐使用正确的<code>getXXX</code>方法，这样可以避免数据类型转换。</p>
+<p>原文地址：<a href="http://javarevisited.blogspot.in/2012/08/top-10-jdbc-best-practices-for-java.html" target="_blank" rel="external">http://javarevisited.blogspot.in/2012/08/top-10-jdbc-best-practices-for-java.html</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+        原创文章，转载请注明： 转载自<a href="http://biezhi.me" target="_blank">王爵的技术博客</a><br/>本文链接地址：<a href="/2017/07/24/top-10-jdbc-best-practices-for-java.html" target="_blank" rel="external">http://biezhi.me/2017/07/24/top-10-jdbc-best-practices-for-java.html</a>
+        
+    </div>
+    <footer>
+        <a href="http://biezhi.me">
+            <img src="/img/avatar.png" alt="王爵nice">
+            王爵nice
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDBC/">JDBC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/最佳实践/">最佳实践</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/连接池/">连接池</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://biezhi.me/2017/07/24/top-10-jdbc-best-practices-for-java.html&title=《十个JDBC的最佳实践》 — 王爵的技术博客&pic=http://biezhi.me/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/24/top-10-jdbc-best-practices-for-java.html&title=《十个JDBC的最佳实践》 — 王爵的技术博客&source=JDBC是Java为多种关系型数据库提供的统一的访问接口，以下是我长期使用JDBC总结的十个最佳实践。
+1. 使用PrearedStatement任何一个..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://biezhi.me/2017/07/24/top-10-jdbc-best-practices-for-java.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《十个JDBC的最佳实践》 — 王爵的技术博客&url=http://biezhi.me/2017/07/24/top-10-jdbc-best-practices-for-java.html&via=http://biezhi.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://biezhi.me/2017/07/24/top-10-jdbc-best-practices-for-java.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/07/21/keep-up-with-java8-features.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">跟上Java8 - 你忽略了的新特性</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'biezhi';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢支持 :)
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>王爵nice &copy; 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://biezhi.me/2017/07/24/top-10-jdbc-best-practices-for-java.html&title=《十个JDBC的最佳实践》 — 王爵的技术博客&pic=http://biezhi.me/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://biezhi.me/2017/07/24/top-10-jdbc-best-practices-for-java.html&title=《十个JDBC的最佳实践》 — 王爵的技术博客&source=JDBC是Java为多种关系型数据库提供的统一的访问接口，以下是我长期使用JDBC总结的十个最佳实践。
+1. 使用PrearedStatement任何一个..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://biezhi.me/2017/07/24/top-10-jdbc-best-practices-for-java.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《十个JDBC的最佳实践》 — 王爵的技术博客&url=http://biezhi.me/2017/07/24/top-10-jdbc-best-practices-for-java.html&via=http://biezhi.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://biezhi.me/2017/07/24/top-10-jdbc-best-practices-for-java.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACv0lEQVR42u3aQW7jMBAEQP//01lgr7uSu2dEx4fiKZATicUA4riHr1c8fv6Of69cjavfub/z/e9cffrAwMPDwxtNvZ1o/sirpbkHPDYfPDw8vGO85JV99RJPqPcTTbaKfAvBw8PD+x5eQp3BNmw8PDy87+dtYoJZCY6Hh4f3nbzky/+5Ejy/cjBrwcPDw5vnrq+2vP78zwf7e3h4eHiLrvpsk2hbWe09i9ni4eHhHeC1rak2qL0PLJJjAbNdYNh5w8PDwysT17ZNdX+7/NMclocOw/8hHh4eXsDbvJr3raz7wnp2nzffGPDw8PAe4u2nuGo+xY20vPTHw8PDO8dLmvptALG/vt8wihMNeHh4eCUvPz6VLMSsudUW3MWneHh4eB/h5eDZSzxZoFmQEX1jwMPDw3uUl79wNxvA/nBVscR4eHh4h3ntVPKQYh9JPBxG4OHh4a1j3FlQO4sSkiJ7ExzX6TUeHh7emjdrfSWxQluI5wV3EVXg4eHhPcqbNb3al/796v7Eo50PHh4e3lO8NoptC9lZsJsfAnuzrHh4eHgHeLMQNim482h4dvBrFUbg4eHhPcqbNcA2B63av5qFyHh4eHhP8dpAti1kZ4FCvlhvFhoPDw/vg7x9gdvi2yMFUaCMh4eHd4A3iw/ywreYRBn7Js/Fw8PDO8GbbQbtEagkLE6uJ9EJHh4e3id57Ws9b+fvo95kcf/zLDw8PLwDvPbwU7tJbJpYr3gMu3l4eHh4I95POdrW/uzowOwpq30PDw8Pb9L9X20bm81mEyLnRTYeHh7es7ynCuJ2/ZLW2mYOeHh4eKd5s5fyU1OcxRZRAY2Hh4f3q7zN8am2kZY3294sBx4eHt4X8PJQYNbm3xwdWJXUeHh4eCVvFkbM2mZFlBAHuJdX8PDw8A7wZgebNlFFHgHnC/raDDw8PLyU9wcbWlS5+VAK0wAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.6.10"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.6.10" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
