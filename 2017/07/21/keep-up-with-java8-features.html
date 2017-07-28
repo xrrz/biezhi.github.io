@@ -30,7 +30,7 @@
 <meta property="og:site_name" content="王爵的技术博客">
 <meta property="og:description" content="虽然我们开始了Java8的旅程，但是很多人直接从java6上手了java8， 也许有一些JDK7的特性你还不知道，在本章节中带你回顾一下我们忘记了的那些特性。 尽管我们不能讲所有特性都讲一遍，挑出常用的核心特性拎出来一起学习。">
 <meta property="og:image" content="http://biezhi.me/static/img/article/java8-new-features.jpg">
-<meta property="og:updated_time" content="2017-07-28T02:24:12.000Z">
+<meta property="og:updated_time" content="2017-07-28T02:25:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跟上Java8 - 你忽略了的新特性">
 <meta name="twitter:description" content="虽然我们开始了Java8的旅程，但是很多人直接从java6上手了java8， 也许有一些JDK7的特性你还不知道，在本章节中带你回顾一下我们忘记了的那些特性。 尽管我们不能讲所有特性都讲一遍，挑出常用的核心特性拎出来一起学习。">
@@ -330,7 +330,7 @@ JDK7修复了这个缺陷，引入了一个新类<code>ReflectiveOperationExcept
 <p><code>emptyList</code>方法使用了类型参数T进行参数化。
 你可以像下面这样为该类型参数提供一个显式的类型进行函数调用：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;Person&gt; persons = Collections.&lt;Person&gt;emptyList();</div></pre></td></tr></table></figure>
-<p>不过Java也可以推断泛型参数的类型，上面的代码和下面这段代码是等价的：</p>
+<p>不过编译器也可以推断泛型参数的类型，上面的代码和下面这段代码是等价的：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;Person&gt; persons = Collections.emptyList();</div></pre></td></tr></table></figure>
 <p>我还是习惯于这样书写。</p>
 <h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><p>Java 8在两个方面对注解机制进行了改进，分别为：</p>

@@ -67,9 +67,9 @@
     </summary>
     
     
-      <category term="JDBC" scheme="http://biezhi.me/tags/JDBC/"/>
-    
       <category term="最佳实践" scheme="http://biezhi.me/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="JDBC" scheme="http://biezhi.me/tags/JDBC/"/>
     
       <category term="连接池" scheme="http://biezhi.me/tags/%E8%BF%9E%E6%8E%A5%E6%B1%A0/"/>
     
@@ -80,7 +80,7 @@
     <link href="http://biezhi.me/2017/07/21/keep-up-with-java8-features.html"/>
     <id>http://biezhi.me/2017/07/21/keep-up-with-java8-features.html</id>
     <published>2017-07-20T16:00:00.000Z</published>
-    <updated>2017-07-28T02:24:12.000Z</updated>
+    <updated>2017-07-28T02:25:33.000Z</updated>
     
     <content type="html"><![CDATA[<p>虽然我们开始了Java8的旅程，但是很多人直接从java6上手了java8，
 也许有一些JDK7的特性你还不知道，在本章节中带你回顾一下我们忘记了的那些特性。
@@ -208,7 +208,7 @@ JDK7修复了这个缺陷，引入了一个新类<code>ReflectiveOperationExcept
 <p><code>emptyList</code>方法使用了类型参数T进行参数化。
 你可以像下面这样为该类型参数提供一个显式的类型进行函数调用：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;Person&gt; persons = Collections.&lt;Person&gt;emptyList();</div></pre></td></tr></table></figure>
-<p>不过Java也可以推断泛型参数的类型，上面的代码和下面这段代码是等价的：</p>
+<p>不过编译器也可以推断泛型参数的类型，上面的代码和下面这段代码是等价的：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">List&lt;Person&gt; persons = Collections.emptyList();</div></pre></td></tr></table></figure>
 <p>我还是习惯于这样书写。</p>
 <h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><p>Java 8在两个方面对注解机制进行了改进，分别为：</p>
@@ -1140,9 +1140,9 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
     
       <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
     
-      <category term="系列" scheme="http://biezhi.me/tags/%E7%B3%BB%E5%88%97/"/>
-    
       <category term="lambda" scheme="http://biezhi.me/tags/lambda/"/>
+    
+      <category term="系列" scheme="http://biezhi.me/tags/%E7%B3%BB%E5%88%97/"/>
     
       <category term="stream-api" scheme="http://biezhi.me/tags/stream-api/"/>
     
