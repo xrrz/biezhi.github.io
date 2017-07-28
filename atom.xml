@@ -80,7 +80,7 @@
     <link href="http://biezhi.me/2017/07/21/keep-up-with-java8-features.html"/>
     <id>http://biezhi.me/2017/07/21/keep-up-with-java8-features.html</id>
     <published>2017-07-20T16:00:00.000Z</published>
-    <updated>2017-07-28T02:13:15.000Z</updated>
+    <updated>2017-07-28T02:24:12.000Z</updated>
     
     <content type="html"><![CDATA[<p>虽然我们开始了Java8的旅程，但是很多人直接从java6上手了java8，
 也许有一些JDK7的特性你还不知道，在本章节中带你回顾一下我们忘记了的那些特性。
@@ -102,7 +102,7 @@
 <p><strong>使用多个资源</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">try</span> ( InputStream is  = <span class="keyword">new</span> FileInputStream(<span class="string">"/home/biezhi/a.txt"</span>);</div><div class="line">      OutputStream os = <span class="keyword">new</span> FileOutputStream(<span class="string">"/home/biezhi/b.txt"</span>)</div><div class="line">) &#123;</div><div class="line">    <span class="keyword">char</span> charStr = (<span class="keyword">char</span>) is.read();</div><div class="line">    os.write(charStr);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>当然如果你使用的是非标准库的类也可以自定义<code>AutoCloseable</code>，只要实现其<code>close</code>方法即可。</p>
-<h3 id="catch多个Exception"><a href="#catch多个Exception" class="headerlink" title="catch多个Exception"></a>catch多个Exception</h3><p>当我们在操作一个对象的时候，有时候它会抛出多个异常，像这样：</p>
+<h3 id="捕获多个Exception"><a href="#捕获多个Exception" class="headerlink" title="捕获多个Exception"></a>捕获多个Exception</h3><p>当我们在操作一个对象的时候，有时候它会抛出多个异常，像这样：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    Thread.sleep(<span class="number">20000</span>);</div><div class="line">    FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"/a/b.txt"</span>);</div><div class="line">&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这样代码写起来要捕获很多异常，不是很优雅，JDK7种允许你捕获多个异常:</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    Thread.sleep(<span class="number">20000</span>);</div><div class="line">    FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"/a/b.txt"</span>);</div><div class="line">&#125; <span class="keyword">catch</span> (InterruptedException | IOException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -139,7 +139,7 @@ JDK7修复了这个缺陷，引入了一个新类<code>ReflectiveOperationExcept
 <blockquote>
 <p>默认情况Files类中的所有方法都会使用UTF-8编码进行操作，当你不愿意这么干的时候可以传递Charset参数进去变更。</p>
 </blockquote>
-<p>当前<code>Files</code>还有一些其他的常用方法:</p>
+<p>当然<code>Files</code>还有一些其他的常用方法:</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">InputStream ins  = Files.newInputStream(path);</div><div class="line">OutputStream ops = Files.newOutputStream(path);</div><div class="line">Reader reader    = Files.newBufferedReader(path);</div><div class="line">Writer writer    = Files.newBufferedWriter(path);</div></pre></td></tr></table></figure>
 <h3 id="创建、移动、删除"><a href="#创建、移动、删除" class="headerlink" title="创建、移动、删除"></a>创建、移动、删除</h3><p>创建文件、目录</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (!Files.exists(path)) &#123;</div><div class="line">    Files.createFile(path);</div><div class="line">    Files.createDirectory(path);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -203,7 +203,7 @@ JDK7修复了这个缺陷，引入了一个新类<code>ReflectiveOperationExcept
 </ul>
 <p><strong>通用目标类型判断</strong></p>
 <p>Java8对泛型参数的推断进行了增强。相信你对Java8之前版本中的类型推断已经比较熟悉了。
-比如，Java中的方法<code>emptyList</code>方法定义如下：</p>
+比如，Collections中的方法<code>emptyList</code>方法定义如下：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">emptyList</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure>
 <p><code>emptyList</code>方法使用了类型参数T进行参数化。
 你可以像下面这样为该类型参数提供一个显式的类型进行函数调用：</p>
@@ -1140,9 +1140,9 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
     
       <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
     
-      <category term="lambda" scheme="http://biezhi.me/tags/lambda/"/>
-    
       <category term="系列" scheme="http://biezhi.me/tags/%E7%B3%BB%E5%88%97/"/>
+    
+      <category term="lambda" scheme="http://biezhi.me/tags/lambda/"/>
     
       <category term="stream-api" scheme="http://biezhi.me/tags/stream-api/"/>
     
