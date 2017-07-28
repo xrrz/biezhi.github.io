@@ -80,7 +80,7 @@
     <link href="http://biezhi.me/2017/07/21/keep-up-with-java8-features.html"/>
     <id>http://biezhi.me/2017/07/21/keep-up-with-java8-features.html</id>
     <published>2017-07-20T16:00:00.000Z</published>
-    <updated>2017-07-24T03:34:04.000Z</updated>
+    <updated>2017-07-28T02:13:15.000Z</updated>
     
     <content type="html"><![CDATA[<p>虽然我们开始了Java8的旅程，但是很多人直接从java6上手了java8，
 也许有一些JDK7的特性你还不知道，在本章节中带你回顾一下我们忘记了的那些特性。
@@ -97,7 +97,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    <span class="comment">// 使用流对象</span></div><div class="line">    stream.read();</div><div class="line">    stream.write();</div><div class="line">&#125; <span class="keyword">catch</span>(Exception e)&#123;</div><div class="line">    <span class="comment">// 处理异常</span></div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    <span class="comment">// 关闭流资源</span></div><div class="line">    <span class="keyword">if</span>(stream != <span class="keyword">null</span>)&#123;</div><div class="line">        stream.close();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这样无疑有些繁琐，而且<code>finally</code>块还有可能抛出异常。在JDK7种提出了<code>try-with-resources</code>机制，
 它规定你操作的类只要是实现了<code>AutoCloseable</code>接口就可以在<code>try</code>语句块退出的时候自动调用<code>close</code>
-方法关闭流资料。</p>
+方法关闭流资源。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">tryWithResources</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    <span class="keyword">try</span>( InputStream ins = <span class="keyword">new</span> FileInputStream(<span class="string">"/home/biezhi/a.txt"</span>) )&#123;</div><div class="line">        <span class="keyword">char</span> charStr = (<span class="keyword">char</span>) ins.read();</div><div class="line">        System.out.print(charStr);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>使用多个资源</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">try</span> ( InputStream is  = <span class="keyword">new</span> FileInputStream(<span class="string">"/home/biezhi/a.txt"</span>);</div><div class="line">      OutputStream os = <span class="keyword">new</span> FileOutputStream(<span class="string">"/home/biezhi/b.txt"</span>)</div><div class="line">) &#123;</div><div class="line">    <span class="keyword">char</span> charStr = (<span class="keyword">char</span>) is.read();</div><div class="line">    os.write(charStr);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -1140,9 +1140,9 @@ Java8把函数式编程里一些最好的思想融入到大家熟知的Java语�
     
       <category term="Java8" scheme="http://biezhi.me/tags/Java8/"/>
     
-      <category term="系列" scheme="http://biezhi.me/tags/%E7%B3%BB%E5%88%97/"/>
-    
       <category term="lambda" scheme="http://biezhi.me/tags/lambda/"/>
+    
+      <category term="系列" scheme="http://biezhi.me/tags/%E7%B3%BB%E5%88%97/"/>
     
       <category term="stream-api" scheme="http://biezhi.me/tags/stream-api/"/>
     
