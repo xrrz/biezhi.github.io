@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://biezhi.me/"/>
-  <updated>2017-08-29T14:26:15.000Z</updated>
+  <updated>2017-08-29T14:36:28.000Z</updated>
   <id>http://biezhi.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://biezhi.me/2017/08/29/talk-tcp-keepalive.html"/>
     <id>http://biezhi.me/2017/08/29/talk-tcp-keepalive.html</id>
     <published>2017-08-28T16:00:00.000Z</published>
-    <updated>2017-08-29T14:26:15.000Z</updated>
+    <updated>2017-08-29T14:36:28.000Z</updated>
     
     <content type="html"><![CDATA[<p>服务端的系统设置中经常会和底层协议打交道，我们有必要重温一下曾经那些“听过”却不熟悉的名词。
 今天聊的话题是 <code>KeepAlive</code>，在实际应用中又是怎么使用的？</p>
@@ -64,8 +64,7 @@
 <li><code>tcp_keepalive_intvl</code>: KeepAlive探测包的发送间隔，默认值为75s</li>
 <li><code>tcp_keepalive_probes</code>: 在tcp_keepalive_time之后，没有接收到对方确认，继续发送保活探测包次数，默认值为9（次）</li>
 </ol>
-<p>Linux系统中TCP是面向连接的,在实际应用中通常都需要检测连接是否还可用.如果不可用,可分为:</p>
-<p>我们讲讲在Linux操作系统和使用Java、C语言如何设置以及他们的局限性</p>
+<p>我们讲讲在Linux操作系统和使用Java、C语言和Nginx中如何设置</p>
 <h3 id="在Linux内核设置"><a href="#在Linux内核设置" class="headerlink" title="在Linux内核设置"></a>在Linux内核设置</h3><p><code>KeepAlive</code>默认不是开启的，如果想使用<code>KeepAlive</code>，需要在你的应用中设置<code>SO_KEEPALIVE</code>才可以生效。</p>
 <p>查看当前的配置：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">cat /proc/sys/net/ipv4/tcp_keepalive_time</div><div class="line">cat /proc/sys/net/ipv4/tcp_keepalive_intvl</div><div class="line">cat /proc/sys/net/ipv4/tcp_keepalive_probes</div></pre></td></tr></table></figure>
@@ -556,9 +555,9 @@ A怎么可以判断发送回来的数据就真的是B发送的呢？现实中有
     </summary>
     
     
-      <category term="最佳实践" scheme="http://biezhi.me/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
-    
       <category term="JDBC" scheme="http://biezhi.me/tags/JDBC/"/>
+    
+      <category term="最佳实践" scheme="http://biezhi.me/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
     
       <category term="连接池" scheme="http://biezhi.me/tags/%E8%BF%9E%E6%8E%A5%E6%B1%A0/"/>
     
