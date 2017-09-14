@@ -555,9 +555,9 @@ A怎么可以判断发送回来的数据就真的是B发送的呢？现实中有
     </summary>
     
     
-      <category term="JDBC" scheme="http://biezhi.me/tags/JDBC/"/>
-    
       <category term="最佳实践" scheme="http://biezhi.me/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="JDBC" scheme="http://biezhi.me/tags/JDBC/"/>
     
       <category term="连接池" scheme="http://biezhi.me/tags/%E8%BF%9E%E6%8E%A5%E6%B1%A0/"/>
     
